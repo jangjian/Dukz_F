@@ -13,7 +13,6 @@ function getAllDiaries() {
                 
                 // console.log(response.data.diaries[i].content);
                 for (let x of response.data.diaries[i].content) {
-                    console.log(x);
                     switch (x.contentType) {
                         case "title": if (resTitle == '제목이 없어요!') resTitle = x.content; break;
                         case "content": if (resContent == '본문이 없어요!') resContent = x.content; break;
@@ -52,8 +51,25 @@ function getAllDiaries() {
         });
 }
 
+function getUserDiary() {
+    const userid = localStorage.getItem("userid");
+  
+    axios
+      .post("http://54.180.238.52:3000/user/getUserDiary", {
+        userid
+      })
+      .then((response) => {
+        console.log('User Diaries:', response.data.사용자의_일지);
+      })
+      .catch((e) => {
+        console.log("Error retrieving user diary:", e);
+      });
+  }
+  
+
 function getDiaryId(diaryId) {
     localStorage.setItem('diaryId', diaryId);
 }
 
+getUserDiary();
 getAllDiaries();
