@@ -214,9 +214,6 @@ body {
 .plan-slide {
     padding: 0 0;
 }
-.plan-slide:nth-child(2) {
-    margin-left: -28vw;
-}
 .plan-container {  
     display: flex;
     justify-content: center;
