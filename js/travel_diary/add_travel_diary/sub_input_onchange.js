@@ -106,19 +106,21 @@ const saveDiary = async () => {
             contentText = element.value;
         } else if (element.classList.contains('image-file')) {
             contentType = 'image';
+        } else if (element.classList.contains('card-container')) {
+            contentType = 'cardNews';
+            contents.push({
+                contentType: contentType,
+                align: element.style.textAlign || 'left',
+                cardNewsId: element.getAttribute('data-card-news-id')
+            });
+            return;
         } else {
             return;
         }
-
-        if (element.classList.contains('card-container')) {
-            contentType = 'cardNews';
-        }
-
         contents.push({
             contentType: contentType,
             contentText: contentText,
-            align: element.style.textAlign || 'left',
-            cardNewsId: element.getAttribute('data-card-news-id')
+            align: element.style.textAlign || 'left'
         });
     });
 
