@@ -9,7 +9,7 @@ const reviewInput = document.getElementById('review');
 document.addEventListener('DOMContentLoaded', () => {
     placeInput.addEventListener('input', () => {
         if (placeInput.value.length > 0) {
-            pinImage.src = "../../../Image/icon/card_icon/pin_24px.svg";
+            pinImage.src = "../../../Image/icon/card_icon/pin_20px.svg";
         } else {
             pinImage.src = "../../../Image/icon/card_icon/pin_uninput.svg";
         }
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     yenInput.addEventListener('input', () => {
         if (yenInput.value.length > 0) {
             yenTxt.style.display = 'block';
-            yenImage.src = "../../../Image/icon/card_icon/yen_24px.svg";
+            yenImage.src = "../../../Image/icon/card_icon/yen_20px.svg";
         } else {
             yenImage.src = "../../../Image/icon/card_icon/yen_uninput.svg";
             yenTxt.style.display = 'none';
