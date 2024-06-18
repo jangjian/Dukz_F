@@ -9,18 +9,18 @@ const reviewInput = document.getElementById('review');
 document.addEventListener('DOMContentLoaded', () => {
     placeInput.addEventListener('input', () => {
         if (placeInput.value.length > 0) {
-            pinImage.src = "../../../Image/icon/card_icon/pin_24px.png";
+            pinImage.src = "../../../Image/icon/card_icon/pin_24px.svg";
         } else {
-            pinImage.src = "../../../Image/icon/card_icon/pin_uninput.png";
+            pinImage.src = "../../../Image/icon/card_icon/pin_uninput.svg";
         }
     });
 
     yenInput.addEventListener('input', () => {
         if (yenInput.value.length > 0) {
             yenTxt.style.display = 'block';
-            yenImage.src = "../../../Image/icon/card_icon/yen_24px.png";
+            yenImage.src = "../../../Image/icon/card_icon/yen_24px.svg";
         } else {
-            yenImage.src = "../../../Image/icon/card_icon/yen_uninput.png";
+            yenImage.src = "../../../Image/icon/card_icon/yen_uninput.svg";
             yenTxt.style.display = 'none';
         }
     });
@@ -71,12 +71,12 @@ let selectedStarRating = 0;
 function setStarRating(rating) {
     for (let i = 1; i <= 5; i++) {
         const starImg = document.getElementById(`star${i}`);
-        starImg.src = "../../../Image/icon/star/un_fill.png";
+        starImg.src = "../../../Image/icon/star/un_fill.svg";
         starNumArr[i - 1] = false;
     }
     for (let i = 1; i <= rating; i++) {
         const starImg = document.getElementById(`star${i}`);
-        starImg.src = "../../../Image/icon/star/fill.png";
+        starImg.src = "../../../Image/icon/star/fill.svg";
         starNumArr[i - 1] = true;
     }
     selectedStarRating = rating;
@@ -125,9 +125,9 @@ cardSaveBtn.onclick = () => {
 
     for (let i of starNumArr) {
         if (i) {
-            starNumSrcArr.push("../../../Image/icon/star/fill.png")
+            starNumSrcArr.push("../../../Image/icon/star/fill.svg")
         } else {
-            starNumSrcArr.push("../../../Image/icon/star/un_fill.png")
+            starNumSrcArr.push("../../../Image/icon/star/un_fill.svg")
         }
     }
 
@@ -151,7 +151,7 @@ const addCardNews = (cardNewsId) => {
         <div class="info-container">
             <div class="line-container">
                 <div class="info-sub-container category-container">
-                    <img class="info-img place-img" src="../../../Image/icon/card_icon/pin_24px.png">
+                    <img class="info-img place-img" src="../../../Image/icon/card_icon/pin_24px.svg">
                     <a href="#" class="info-txt">${placeInput.value}</a>
                 </div>
                 <div class="star-rating">
@@ -163,11 +163,11 @@ const addCardNews = (cardNewsId) => {
                 </div>
             </div>
             <div class="info-sub-container">
-                <img class="info-img time-img" src="../../../Image/icon/card_icon/time_24px.png">
+                <img class="info-img time-img" src="../../../Image/icon/card_icon/time_24px.svg">
                 <span class="info-txt time">${timeTxtSpan.textContent}</span>
             </div>
             <div class="info-sub-container">
-                <img class="info-img time-img" src="../../../Image/icon/card_icon/yen_24px.png">
+                <img class="info-img time-img" src="../../../Image/icon/card_icon/yen_24px.svg">
                 <span class="info-txt yen">${yenInput.value}円</span>
             </div>
             <div class="review-container">
@@ -231,7 +231,7 @@ document.getElementById('cardSaveBtn').addEventListener('click', saveCardNews);
 
 function resetModalContent() {
     placeInput.value = '';
-    pinImage.src = "../../../Image/icon/card_icon/pin_uninput.png";
+    pinImage.src = "../../../Image/icon/card_icon/pin_uninput.svg";
 
     const selectedImages = document.querySelectorAll('.selected-image');
     selectedImages.forEach(image => image.remove());
@@ -239,17 +239,17 @@ function resetModalContent() {
 
     timeTxtSpan.textContent = "시간을 입력해주세요";
     timeTxtSpan.style.color = 'var(--bs-black-34)';
-    timeImage.src = "../../../Image/icon/card_icon/time_uninput.png";
+    timeImage.src = "../../../Image/icon/card_icon/time_uninput.svg";
 
     yenInput.value = '';
     yenInput.style.width = '120px';
     yenTxt.style.display = 'none';
-    yenImage.src = "../../../Image/icon/card_icon/yen_uninput.png";
+    yenImage.src = "../../../Image/icon/card_icon/yen_uninput.svg";
 
     reviewInput.value = '';
 
     for (let i = 1; i <= 5; i++) {
-        document.getElementById(`star${i}`).src = "../../../Image/icon/star/un_fill.png";
+        document.getElementById(`star${i}`).src = "../../../Image/icon/star/un_fill.svg";
     }
     starNumArr = [false, false, false, false, false];
 
