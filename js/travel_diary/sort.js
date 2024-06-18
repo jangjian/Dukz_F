@@ -19,10 +19,12 @@ function getAllDiaries() {
                 let resContent = '';
 
                 for (let con of x.content) {
+                    console.log(con)
+                    
                     switch (con.contentType) {
                         case "title": resTitle = con.content; break;
-                        case "image": resImageSrc = `http://54.180.238.52:3000${con.imageSrc}`; break;
-                        case "content": resContent = con.content; break;
+                        case "image": if (resImageSrc == '') resImageSrc = `http://54.180.238.52:3000${con.imageSrc}`; break;
+                        case "content": if (resContent == '') resContent = con.content; break;
                     }
                 }
 

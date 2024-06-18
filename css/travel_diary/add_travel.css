@@ -6,7 +6,9 @@
     font-size: var(--bs-font-22px);
     font-weight: var(--bs-font-semibold);
     text-align: left;
-}
-.title {
     margin-bottom: 36px;
+}
+
+#region-select {
+    background-color: var(--bs-white);
 }
