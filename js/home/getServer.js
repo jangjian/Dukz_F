@@ -70,9 +70,9 @@ function getName() {
         secondCardNews = response.data[1];
         thirdCardNews = response.data[2];
   
-        console.log("First Card News:", firstCardNews);
-        console.log("Second Card News:", secondCardNews);
-        console.log("Third Card News:", thirdCardNews);
+        // console.log("First Card News:", firstCardNews);
+        // console.log("Second Card News:", secondCardNews);
+        // console.log("Third Card News:", thirdCardNews);
   
         const hashtagContainer = document.querySelector(".hashtag-container");
         hashtagContainer.innerHTML = "";
@@ -142,6 +142,22 @@ function getName() {
         const recommendedDiaries = response.data.recommendedDiaries;
   
         console.log("Recommended Diaries:", recommendedDiaries);
+
+        const placeSecondDiv = document.getElementsByClassName('place-second')[0];
+        const placeThirdDiv = document.getElementsByClassName('place-third')[0];
+        // const placeMoreDiv = document.getElementsByClassName('place-more')[0];
+
+        switch (recommendedDiaries.length) {
+          case 1: 
+            placeSecondDiv.style.display = 'none'; 
+            placeThirdDiv.style.display = 'none'; 
+            // placeMoreDiv.style.display = 'none';
+          break;
+          case 2: 
+          placeThirdDiv.style.display = 'none'; 
+          // placeMoreDiv.style.display = 'none';
+          break;
+        }
   
         if (Array.isArray(recommendedDiaries)) {
           recommendedDiaries.forEach((diaryGroup, index) => {
