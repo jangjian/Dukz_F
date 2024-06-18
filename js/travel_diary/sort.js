@@ -27,7 +27,7 @@ function getAllDiaries() {
                 }
 
                 if (resTitle == '') resTitle = '제목이 없는 글이에요!';
-                if (resImageSrc == '') resImageSrc = "../../Image/dukduk/nothing.png";
+                if (resImageSrc == '') resImageSrc = "../../Image/dukduk/nothing.svg";
                 if (resContent == '') resContent = '내용이 없는 글이에요!';
 
                 let placeDiv = document.createElement('div');
@@ -37,7 +37,7 @@ function getAllDiaries() {
                     <div class="place-txt-container">
                         <div class="line-container">
                             <div class="place-title">${resTitle}</div>
-                            <img class="map-icon" src="../../Image/icon/map.png">
+                            <img class="map-icon" src="../../Image/icon/map.svg">
                         </div>
                         <div class="place-info">${resContent}</div>
                         <div class="hashtag-container place-tag">

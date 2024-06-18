@@ -1,5 +1,5 @@
 function useDefaultEdit() {
-    profileImg.src = "../../Image/profile/profile_img_default.png";
+    profileImg.src = "../../Image/profile/profile_img_default.svg";
 }
 
 const defaultName = document.getElementsByClassName('input-name')[0].value;

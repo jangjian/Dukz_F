@@ -11,18 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     placeInput.addEventListener('input', () => {
         if (placeInput.value.length > 0) {
-            pinImage.src = "../../Image/icon/card_icon/pin_24px.png";
+            pinImage.src = "../../Image/icon/card_icon/pin_20px.svg";
         } else {
-            pinImage.src = "../../Image/icon/card_icon/pin_uninput.png";
+            pinImage.src = "../../Image/icon/card_icon/pin_uninput.svg";
         }
     })
 
     yenInput.addEventListener('input', () => {
         if (yenInput.value.length > 0) {
             yenTxt.style.display = 'block';
-            yenImage.src = "../../Image/icon/card_icon/yen_24px.png";
+            yenImage.src = "../../Image/icon/card_icon/yen_20px.svg";
         } else {
-            yenImage.src = "../../Image/icon/card_icon/yen_uninput.png";
+            yenImage.src = "../../Image/icon/card_icon/yen_uninput.svg";
             yenTxt.style.display = 'none';
         }
     })
@@ -77,10 +77,10 @@ closeModal.onclick = () => {
 const startController = (starNum) => {
     starNum = Number(starNum.match(/\d+/)[0]);
     for (let i = 1; i <= starNum; i++) {
-        document.getElementById(`star${i}`).src = "../../Image/icon/star/fill.png"
+        document.getElementById(`star${i}`).src = "../../Image/icon/star/fill.svg"
     }
     for (let i = 5; i > starNum; i--) {
-        document.getElementById(`star${i}`).src = "../../Image/icon/star/un_fill.png"
+        document.getElementById(`star${i}`).src = "../../Image/icon/star/un_fill.svg"
     }
 }
 
@@ -136,7 +136,7 @@ cardSaveBtn.onclick = () => {
 
     const placeIcon = document.createElement('img');
     placeIcon.classList.add('card-news-place-icon');
-    placeIcon.src = '../../Image/icon/map.png';
+    placeIcon.src = '../../Image/icon/map.svg';
 
     placeContainer.appendChild(placeText);
     placeContainer.appendChild(placeIcon);

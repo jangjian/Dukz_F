@@ -88,7 +88,7 @@ saveBtn.onclick = () => {
 
     modal.style.display = 'none';
 
-    timeImage.src = "../../../Image/icon/card_icon/time_24px.png";
+    timeImage.src = "../../../Image/icon/card_icon/time_20px.svg";
     timeTxtSpan.style.color = "black";
 
 }

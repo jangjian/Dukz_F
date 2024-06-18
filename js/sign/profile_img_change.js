@@ -2,7 +2,7 @@ let profileImg = document.getElementById('profile-img');
 let nextBtn = document.getElementsByClassName('next-btn')[0];
 
 function useDefault() {
-    profileImg.src = "../../../Image/profile/profile_img_default.png";
+    profileImg.src = "../../../Image/profile/profile_img_default.svg";
 }
 
 function modalVisible() {
