@@ -46,6 +46,8 @@ function getDiary() {
                     }
                 }
             }
+            writeDiv.style.textAlign = recommendedDiaries[0][0].align;
+            
             document.getElementsByClassName('date-container')[0].innerHTML = createDate.split(' ')[0];
             console.log("User Name:", name);
             console.log("Create Date:", createDate); // createDate 콘솔 출력 추가
