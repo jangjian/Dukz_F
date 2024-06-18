@@ -2,6 +2,10 @@ function saveRegion() {
     const regionName = document.getElementById('region-select').value; 
     const userid = localStorage.getItem('userid'); 
 
+    if (regionName =="") {
+        alert("지역을 입력해주세요")
+        return;
+    }
     axios
     .post("http://54.180.238.52:3000/user/saveRegion", { 
         regionName: regionName,
