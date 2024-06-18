@@ -151,7 +151,7 @@ const addCardNews = (cardNewsId) => {
         <div class="info-container">
             <div class="line-container">
                 <div class="info-sub-container category-container">
-                    <img class="info-img place-img" src="../../../Image/icon/card_icon/pin_24px.svg">
+                    <img class="info-img place-img" src="../../../Image/icon/card_icon/pin_20px.svg">
                     <a href="#" class="info-txt">${placeInput.value}</a>
                 </div>
                 <div class="star-rating">
@@ -163,11 +163,11 @@ const addCardNews = (cardNewsId) => {
                 </div>
             </div>
             <div class="info-sub-container">
-                <img class="info-img time-img" src="../../../Image/icon/card_icon/time_24px.svg">
+                <img class="info-img time-img" src="../../../Image/icon/card_icon/time_20px.svg">
                 <span class="info-txt time">${timeTxtSpan.textContent}</span>
             </div>
             <div class="info-sub-container">
-                <img class="info-img time-img" src="../../../Image/icon/card_icon/yen_24px.svg">
+                <img class="info-img time-img" src="../../../Image/icon/card_icon/yen_20px.svg">
                 <span class="info-txt yen">${yenInput.value}円</span>
             </div>
             <div class="review-container">
