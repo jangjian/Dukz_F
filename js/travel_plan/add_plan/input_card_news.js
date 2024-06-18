@@ -188,7 +188,7 @@ cardSaveBtn.onclick = () => {
     .then(response => response.json())
     .then(data => {
         console.log('카드 뉴스 저장 성공:', data);
-        alert('카드 뉴스가 성공적으로 저장되었습니다.');
+        // alert('카드 뉴스가 성공적으로 저장되었습니다.');
         // 필요한 추가 작업 수행 (예: 화면 갱신 등)
     })
     .catch(error => {

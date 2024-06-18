@@ -20,7 +20,7 @@ const openCardModal = (num) => {
 
     document.getElementById('card-image').src = `http://54.180.238.52:3000${nowCardNews.cardNews.image_url}`;
     document.getElementsByClassName('modal-info-txt')[0].innerHTML = nowCardNews.cardNews.place;
-    document.getElementById('modal-time').innerHTML = `${firstCardNews.cardNews.open_time} ~ ${firstCardNews.cardNews.close_time}`;
+    document.getElementById('modal-time').innerHTML = `${nowCardNews.cardNews.open_time} ~ ${nowCardNews.cardNews.close_time}`;
     document.getElementById('modal-yen').innerHTML = `${nowCardNews.cardNews.price}円`;
     document.getElementById('review-span').innerHTML = nowCardNews.cardNews.card_review;
 
