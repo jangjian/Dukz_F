@@ -1,23 +1,19 @@
 const placeInput = document.getElementsByClassName('place')[0];
 const pinImage = document.getElementById('pin-image');
-
 const timeImage = document.getElementById('time-image');
-
 const yenImage = document.getElementById('yen-image');
 const yenInput = document.getElementById('yen-input');
 const yenTxt = document.getElementById('yen-txt');
-
 const reviewInput = document.getElementById('review');
 
 document.addEventListener('DOMContentLoaded', () => {
-
     placeInput.addEventListener('input', () => {
         if (placeInput.value.length > 0) {
             pinImage.src = "../../../Image/icon/card_icon/pin_24px.png";
         } else {
             pinImage.src = "../../../Image/icon/card_icon/pin_uninput.png";
         }
-    })
+    });
 
     yenInput.addEventListener('input', () => {
         if (yenInput.value.length > 0) {
@@ -27,14 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
             yenImage.src = "../../../Image/icon/card_icon/yen_uninput.png";
             yenTxt.style.display = 'none';
         }
-    })
-
+    });
 });
 
 const CardNewsmodal = document.getElementById("card-news-modal");
 const closeModal = document.getElementsByClassName("close")[0];
 const timeTxtSpan = document.getElementById("time");
-
 
 // 이미지 선택 및 표시
 const addImage = document.querySelector('.card-image-container');
@@ -62,7 +56,6 @@ imageInput.addEventListener('change', (event) => {
     }
 });
 
-
 const cardOpen = () => {
     CardNewsmodal.style.display = "block";
 }
@@ -71,7 +64,7 @@ closeModal.onclick = () => {
     CardNewsmodal.style.display = "none";
 }
 
-let starNumArr = [false, false, false, false, false]
+let starNumArr = [false, false, false, false, false];
 
 // 별점 설정 함수
 let selectedStarRating = 0;
@@ -89,19 +82,14 @@ function setStarRating(rating) {
     selectedStarRating = rating;
 }
 
-
 const inputHash = document.querySelector('input[name=basic]');
 let tagify = new Tagify(inputHash);
 
 tagify.on('add', function () {
     const lastTag = tagify.value[tagify.value.length - 1];
 
-    // if (lastTag && lastTag.value.length > 5) {
-    //     alert("태그는 5글자 이하로 입력해주세요");
-    //     tagify.removeTag(lastTag.value);
-    // } 
     if (tagify.value.length > 3) {
-        alert("태그는 3개까지 입력할 수 있습니다");
+        alert("해시태그는 3개까지만 입력할 수 있습니다.");
         tagify.removeTag(lastTag.value);
     }
 });
@@ -111,7 +99,6 @@ const firstStarImg = document.getElementById('star1');
 let starNumSrcArr = [];
 
 cardSaveBtn.onclick = () => {
-
     // 유효성 검사
     if (addImage.children.length <= 2) {
         alert("이미지를 입력해주세요");
@@ -143,16 +130,14 @@ cardSaveBtn.onclick = () => {
             starNumSrcArr.push("../../../Image/icon/star/un_fill.png")
         }
     }
-    console.log(starNumArr);
-    console.log(starNumSrcArr)
-
 
     CardNewsmodal.style.display = 'none';
 }
 
-const addCardNews = () => {
+const addCardNews = (cardNewsId) => {
     const cardContainer = document.createElement('div');
     cardContainer.className = 'card-container';
+    cardContainer.setAttribute('data-card-news-id', cardNewsId);
 
     cardContainer.innerHTML = `
         <div class="place-title-container">
@@ -193,6 +178,7 @@ const addCardNews = () => {
 
     containerDiv.appendChild(cardContainer);
 }
+
 // 시간 변환 함수 수정
 function convertTimeToString(hours, minutes) {
     return `${hours}:${minutes}`;
@@ -209,10 +195,6 @@ function saveCardNews() {
     let open_time = convertTimeToString(HourStart, MinuteStart);
     let close_time = convertTimeToString(HourEnd, MinuteEnd);
 
-    console.log(open_time);
-    console.log(close_time);
-
-    // Append additional fields to FormData
     formData.append('place', place);
     formData.append('open_time', open_time);
     formData.append('close_time', close_time);
@@ -229,9 +211,14 @@ function saveCardNews() {
     })
         .then((response) => {
             console.log("Card news saved:", response.data);
-            // alert("카드 뉴스가 성공적으로 저장되었습니다.");
-            console.log("Saved Card News ID:", response.data.cardNewsId); // Log the cardNewsId here
-            addCardNews();
+            const cardNewsId = response.data.cardNewsId;
+
+            // `localStorage`에 저장된 `cardNewsIds` 배열을 업데이트
+            let cardNewsIds = JSON.parse(localStorage.getItem('cardNewsIds')) || [];
+            cardNewsIds.push(cardNewsId);
+            localStorage.setItem('cardNewsIds', JSON.stringify(cardNewsIds));
+
+            addCardNews(cardNewsId);
             resetModalContent();
         })
         .catch((error) => {
@@ -241,7 +228,6 @@ function saveCardNews() {
 }
 
 document.getElementById('cardSaveBtn').addEventListener('click', saveCardNews);
-
 
 function resetModalContent() {
     placeInput.value = '';
