@@ -88,8 +88,7 @@ const saveDiary = async () => {
         return;
     }
 
-    const contentElements = document.querySelectorAll('.input-content');
-    const cardElements = document.querySelectorAll('.card-container');
+    const contentElements = document.querySelectorAll('.input-content, .card-container');
 
     contentElements.forEach(element => {
         let contentType;
