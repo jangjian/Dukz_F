@@ -1,5 +1,5 @@
 const containerDiv = document.getElementsByClassName('right-container')[0];
-let formData = new FormData(); // formData를 전역 변수로 정의합니다.
+let formData = new FormData();
 
 const textOnChange = () => {
     const subInputValue = document.querySelector('input[name="sub-input-text"]:checked').value;
@@ -26,6 +26,7 @@ const textOnChange = () => {
 
     alignOnChange();
 };
+
 document.querySelectorAll('.text-container > .size-group input').forEach(input => {
     input.addEventListener('click', function(event) {
         event.stopPropagation();
@@ -47,7 +48,6 @@ const imageOnChange = (event) => {
 
     reader.readAsDataURL(event.target.files[0]);
 };
-
 
 const alignOnChange = () => {
     const subInputValue = document.querySelector('input[name="sub-input-align"]:checked').value;
@@ -88,12 +88,8 @@ const saveDiary = async () => {
         return;
     }
 
-
     const contentElements = document.querySelectorAll('.input-content');
-    if (!contentElements || contentElements.length === 0) {
-        console.error('No input content elements found.');
-        return; 
-    }
+    const cardElements = document.querySelectorAll('.card-container');
 
     contentElements.forEach(element => {
         let contentType;
@@ -114,12 +110,18 @@ const saveDiary = async () => {
             return;
         }
 
+        if (element.classList.contains('card-container')) {
+            contentType = 'cardNews';
+        }
+
         contents.push({
             contentType: contentType,
             contentText: contentText,
-            align: element.style.textAlign || 'left'
+            align: element.style.textAlign || 'left',
+            cardNewsId: element.getAttribute('data-card-news-id')
         });
     });
+
 
     try {
         formData.append('diaryId', diaryId);
@@ -132,11 +134,8 @@ const saveDiary = async () => {
         });
 
         if (response.data.message) {
-            const imageUrls = response.data.image_urls;
-            // console.log('Image URLs:', imageUrls);
-            
             alert('일지가 성공적으로 저장되었습니다.');
-            location.href='../travel_diary.html'
+            location.href = '../travel_diary.html'
         } else {
             console.error('Error saving diary:', response.data.message);
         }
@@ -145,7 +144,6 @@ const saveDiary = async () => {
         alert('일지 저장 중 오류가 발생했습니다.');
     }
 };
-
 
 function displayUploadedImage(imageUrl) {
     const Img = document.createElement('img');
