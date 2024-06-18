@@ -25,7 +25,7 @@ const openCardModal = (num) => {
     document.getElementById('review-span').innerHTML = nowCardNews.cardNews.card_review;
 
     for (let i = 1; i <= nowCardNews.cardNews.star; i++ ) {
-        document.getElementById(`star${i}`).src = "../../../Image/icon/star/fill.png"
+        document.getElementById(`star${i}`).src = "../../../Image/icon/star/fill.svg"
     }
  
     let hashtagContainer = document.querySelector(".modal-hashtag-container");
@@ -43,6 +43,6 @@ const openCardModal = (num) => {
 closeModal.onclick = () => {
     CardNewsmodal.style.display = "none";
     for (let i = 1; i <= 5; i++ ) {
-        document.getElementById(`star${i}`).src = "../../../Image/icon/star/un_fill.png"
+        document.getElementById(`star${i}`).src = "../../../Image/icon/star/un_fill.svg"
     }
 }

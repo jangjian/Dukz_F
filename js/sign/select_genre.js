@@ -16,9 +16,9 @@ function selectCheck(container) {
 
 
     if (imgElement.src.includes('un_selected')) {
-        imgElement.src = `../../../Image/select_genre/selected/${genreName}.png`;
+        imgElement.src = `../../../Image/select_genre/selected/${genreName}.svg`;
     } else {
-        imgElement.src = `../../../Image/select_genre/un_selected/${genreName}.png`;
+        imgElement.src = `../../../Image/select_genre/un_selected/${genreName}.svg`;
     }
 
 }

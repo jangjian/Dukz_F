@@ -135,12 +135,12 @@ input[type=checkbox]+label {
     color: var(--bs-black-50);
     padding-left: 25px;
     background-repeat: no-repeat;
-    background-image: url('../Image/icon/check/uncheck.png');
+    background-image: url('../Image/icon/check/uncheck.svg');
 }
 
 input[type=checkbox]:checked+label {
     color: var(--bs-black);
-    background-image: url('../Image/icon/check/check.png');
+    background-image: url('../Image/icon/check/check.svg');
 }
 
 .chkbox-label {
