@@ -25,14 +25,14 @@
 
             <input type="text" class="input-name" id="name" value="우끼끼" oninput="chkToEdit()" placeholder="닉네임을 입력해주세요">
 
-            <button class="next-btn disabled" disabled onclick="uploadMyPageImage(); changeName(); ">확인</button>
+            <button class="next-btn disabled" disabled onclick="uploadMyPageImage();">확인</button>
 
             <div class="modal-container">
                 <button class="img-btn" id="default" onclick="useDefaultEdit();">기본 이미지 사용</button>
                 <button class="img-btn" id="take-picture">사진 찍기</button>
                 <form class="img-btn" id="uploadForm" enctype="multipart/form-data">
                     <label for="gallery-picker" class="img-btn" id="bring-gallery">갤러리에서 가져오기</label>
-                    <input type="file" id="gallery-picker" name="profile_image" accept="image/*" style="display: none;"
+                    <input type="file" id="gallery-picker" name="images" accept="image/*" style="display: none;"
                         required onchange="showSelectedImage()">
                 </form>
             </div>

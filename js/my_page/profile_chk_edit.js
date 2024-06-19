@@ -52,14 +52,16 @@ function fetchAndLogUserInfo() {
   
   fetchAndLogUserInfo();
 
-  function uploadMyPageImage() {
+function uploadMyPageImage() {
     const formData = new FormData();
     const fileInput = document.getElementById('gallery-picker');
     const file = fileInput.files[0];
+    const userid = localStorage.getItem('userid');
     
-    formData.append('images', file);
+    formData.append('userid', userid); 
+    formData.append('images', file); 
 
-    axios.post('http://54.180.238.52:3000/user/signup5', formData, {
+    axios.post('http://54.180.238.52:3000/user/changeUserImage', formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
@@ -68,15 +70,13 @@ function fetchAndLogUserInfo() {
         console.log('Image upload response:', response.data);
 
         if (response.data.success) {
-            const imageUrl = response.data.image_url;
-            console.log('Image URL:', imageUrl);
-            history.back();
+            const imageUrls = response.data.image_urls;
+            console.log('Image URLs:', imageUrls);
         } else {
             console.error('Image upload failed:', response.data.message);
         }
     })
     .catch(error => {
         console.error('Error uploading image:', error);
-        document.getElementById('result').innerHTML = 'Error uploading image: ' + error.message;
     });
 }
