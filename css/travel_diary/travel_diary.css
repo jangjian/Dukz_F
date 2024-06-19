@@ -112,6 +112,9 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+.place-tag > span {
+    margin-right: 5px;
+}
 
 .show-diary-container {
     margin: 20px 20px 0 20px;
@@ -190,6 +193,9 @@
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+.grid-place-tag > span {
+    margin-right: 5px;
 }
 .heart-btn,
 .bookmark-btn {

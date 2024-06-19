@@ -13,14 +13,13 @@ function getAllDiaries() {
     axios.post("http://54.180.238.52:3000/user/getAllDiaries", {})
         .then((response) => {
             console.log('Successfully fetched diaries:', response.data.diaries);
-            for (let x of response.data.diaries) {
+            const diaries = response.data.diaries;
+            for (let i in diaries) {
                 let resImageSrc = '';
                 let resTitle = '';
                 let resContent = '';
 
-                for (let con of x.content) {
-                    console.log(con)
-                    
+                for (let con of diaries[i].contents) {
                     switch (con.contentType) {
                         case "title": resTitle = con.content; break;
                         case "image": if (resImageSrc == '') resImageSrc = `http://54.180.238.52:3000${con.imageSrc}`; break;
@@ -43,20 +42,28 @@ function getAllDiaries() {
                         </div>
                         <div class="place-info">${resContent}</div>
                         <div class="hashtag-container place-tag">
-                            <span>#트레저_월드맵</span>
-                            <span>#트월맵</span>
-                            <span>#오사카</span>
                         </div>
                     </div>
                 `;
 
                 // Add click event to save diaryId and navigate to detail page
                 placeDiv.addEventListener('click', () => {
-                    getDiaryId(x.diaryId);
+                    getDiaryId(diaries[i].diaryId);
                     location.href = '../travel_diary/travel_diary_content.html';
                 });
 
                 allDiaryDiv.append(placeDiv);
+    
+                const hashTagContainer = document.getElementsByClassName('place-tag')[i];
+                
+                for (let j = 0; j < diaries[i].genres.length; j++) {
+                    const hashtagDiv = document.createElement('span');
+                    hashtagDiv.innerHTML = `#${diaries[i].genres[j]}`;
+                    hashTagContainer.appendChild(hashtagDiv);
+                }
+                const regionHash = document.createElement('span');
+                regionHash.innerHTML = `#${diaries[i].region}`;
+                hashTagContainer.appendChild(regionHash);
             }
         })
         .catch((error) => {

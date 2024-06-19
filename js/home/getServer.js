@@ -162,11 +162,13 @@ function getName() {
         if (Array.isArray(recommendedDiaries)) {
           recommendedDiaries.forEach((diaryGroup, index) => {
             const placeContainerClass = `.place-container.place-${["first", "second", "third"][index]}`;
+
+            console.log(diaryGroup)
   
-            const titleContent = diaryGroup.find(diary => diary.contentType === 'title');
-            const firstContent = diaryGroup.find(diary => diary.contentType === 'content');
-            const firstImage = diaryGroup.find(diary => diary.contentType === 'image');
-            const diaryId = diaryGroup[0].diaryId; // Assuming diaryId is available in each group
+            const titleContent = diaryGroup.contents.find(diary => diary.contentType === 'title');
+            const firstContent = diaryGroup.contents.find(diary => diary.contentType === 'content');
+            const firstImage = diaryGroup.contents.find(diary => diary.contentType === 'image');
+            const diaryId = diaryGroup.contents[0].diaryId; // Assuming diaryId is available in each group
   
             if (titleContent) {
               const titleElement = document.querySelector(`${placeContainerClass} .place-title`);
@@ -189,6 +191,16 @@ function getName() {
                 imgElement.src = `http://54.180.238.52:3000${firstImage.imageSrc}`;
               }
             }
+
+            const placeTagDiv = document.getElementsByClassName('place-tag')[index];
+            for (let i = 0; i < diaryGroup.genres.length; i++) {
+              const hashSpan = document.createElement('span');
+              hashSpan.innerHTML = `#${diaryGroup.genres[i]}`;
+              placeTagDiv.appendChild(hashSpan);
+            }
+            const regionHashSpan = document.createElement('span');
+            regionHashSpan.innerHTML = `#${diaryGroup.region}`;
+            placeTagDiv.appendChild(regionHashSpan);
   
             // Update onclick handler to include diaryId
             const placeContainer = document.querySelector(placeContainerClass);
