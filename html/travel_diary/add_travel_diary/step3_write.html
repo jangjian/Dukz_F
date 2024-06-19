@@ -60,8 +60,10 @@
                     <button class="image-btn"><img src='../../../Image/icon/camera/camera.svg'></button>
                 </label>
                 <label class='size-group'>
-                    <input type="file" id="image-upload-2" accept="image/*" style="display: none;" onchange="imageOnChange(event)">
-                    <button class="image-btn" onclick="document.getElementById('image-upload-2').click();"><img src='../../../Image/icon/camera/image.svg'></button>
+                    <input type="file" id="image-upload-2" accept="image/*" style="display: none;"
+                        onchange="imageOnChange(event)">
+                    <button class="image-btn" onclick="document.getElementById('image-upload-2').click();"><img
+                            src='../../../Image/icon/camera/image.svg'></button>
                 </label>
             </div>
             <div class="align-container hidden" onchange="alignOnChange()">
@@ -88,11 +90,14 @@
         <!-- card-news-modal -->
         <div id="card-news-modal" class="modal">
             <div class="card-modal-content">
-                <span class="close" id="card-close">&times;</span>
-                <div class="card-image-container">
-                    <span class="add-image">&#43;</span>
-                    <input type="file" id="image-input" accept="image/*" style="display:none;">
+                <div class="card-top-container">
+                    <span class="close" id="card-close">&times;</span>
+                    <div class="card-image-container">
+                        <span class="add-image">&#43;</span>
+                        <input type="file" id="image-input" accept="image/*" style="display:none;">
+                    </div>
                 </div>
+
                 <div class="info-container">
                     <div class="line-container">
                         <div class="info-sub-container">
@@ -100,11 +105,16 @@
                             <input type="text" class="info-txt place" id="place" placeholder="장소를 입력해주세요">
                         </div>
                         <div class="star-rating">
-                            <img onclick="setStarRating(1)" class="star" id="star1" src="../../../Image/icon/star/un_fill.svg">
-                            <img onclick="setStarRating(2)" class="star" id="star2" src="../../../Image/icon/star/un_fill.svg">
-                            <img onclick="setStarRating(3)" class="star" id="star3" src="../../../Image/icon/star/un_fill.svg">
-                            <img onclick="setStarRating(4)" class="star" id="star4" src="../../../Image/icon/star/un_fill.svg">
-                            <img onclick="setStarRating(5)" class="star" id="star5" src="../../../Image/icon/star/un_fill.svg">
+                            <img onclick="setStarRating(1)" class="star" id="star1"
+                                src="../../../Image/icon/star/un_fill.svg">
+                            <img onclick="setStarRating(2)" class="star" id="star2"
+                                src="../../../Image/icon/star/un_fill.svg">
+                            <img onclick="setStarRating(3)" class="star" id="star3"
+                                src="../../../Image/icon/star/un_fill.svg">
+                            <img onclick="setStarRating(4)" class="star" id="star4"
+                                src="../../../Image/icon/star/un_fill.svg">
+                            <img onclick="setStarRating(5)" class="star" id="star5"
+                                src="../../../Image/icon/star/un_fill.svg">
                         </div>
                     </div>
                     <div class="info-sub-container">
@@ -137,7 +147,7 @@
             <div class="time-modal-content">
                 <div class="time-title-container">
                     <span class="time-title">시간 선택</span>
-                    <span class="close">&times;</span>
+                    <span class="close" id="time-close">&times;</span>
                 </div>
                 <div>
                     <span class="time-sub-text">시작 시간</span>
