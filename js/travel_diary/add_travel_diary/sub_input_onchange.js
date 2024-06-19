@@ -86,38 +86,43 @@ const alignOnChange = () => {
 };
 
 const saveDiary = async () => {
+    let imageFileArrCount = 0;
+    const formData = new FormData();
 
-    // 유효성 검사
-    // if (document.getElementsByClassName('title-txt')[0].value == '') {
-    //     alert('제목을 입력해주세요');
-    //     return;
-    // } else if (document.getElementsByClassName('content-txt')[0] == undefined
-    //     || document.getElementsByClassName('content-txt')[0].value == '') {
-    //     alert('하나 이상의 본문을 입력해주세요');
-    //     return;
-    // } else if (document.getElementsByClassName('card-container')[0] == undefined) {
-    //     alert('하나 이상의 일정을 입력해 주세요');
-    //     return;
-    // }
+    formData.append('diaryId', diaryId);
 
     const contentElements = document.querySelectorAll('.input-content, .card-container');
 
-    let imageFileArrCount = 0;
+        // 유효성 검사
+    if (document.getElementsByClassName('title-txt')[0].value == '') {
+        alert('제목을 입력해주세요');
+        return;
+    } else if (document.getElementsByClassName('content-txt')[0] == undefined
+        || document.getElementsByClassName('content-txt')[0].value == '') {
+        alert('하나 이상의 본문을 입력해주세요');
+        return;
+    } else if (document.getElementsByClassName('card-container')[0] == undefined) {
+        alert('하나 이상의 일정을 입력해 주세요');
+        return;
+    }
+    
+    imageFileArr.forEach(imageFile => formData.append('images', imageFile))
+    
     contentElements.forEach(element => {
         let contentType = '';
-        let content = '';
+        let contentText = '';
         let imageSrc = null;
         let cardNewsId = null;
 
         if (element.classList.contains('title-txt')) {
             contentType = 'title';
-            content = element.value;
+            contentText = element.value;
         } else if (element.classList.contains('sub-title-txt')) {
             contentType = 'subtitle';
-            content = element.value;
+            contentText = element.value;
         } else if (element.classList.contains('content-txt')) {
             contentType = 'content';
-            content = element.value;
+            contentText = element.value;
         } else if (element.classList.contains('image-file')) {
             contentType = 'image';
             imageSrc = imageFileArr[imageFileArrCount];
@@ -133,36 +138,37 @@ const saveDiary = async () => {
         {
             diaryId: diaryId,
             contentType: contentType,
-            content: content,
+            contentText: contentText,
             align: nowAlign,
-            imageSrc: imageSrc,
+            images: imageSrc,
             cardNewsId: cardNewsId
         })
+
+        console.log(diaryFormData);
     });
+    formData.append('contents', JSON.stringify(diaryFormData));
 
-    console.log(diaryFormData);
+    try {
+        const response = await axios.post('http://54.180.238.52:3000/user/saveDiary', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+
+        if (response.data.message) {
+            alert('일지가 성공적으로 저장되었습니다.');
+            location.href = '../travel_diary.html';
+        } else {
+            console.error('Error saving diary:', response.data.message);
+        }
+    } catch (error) {
+        console.error('Error saving diary:', error);
+        alert('일지 저장 중 오류가 발생했습니다.');
+    }
+
+    return;
 
 
-    // try {
-    //     // formData.append('diaryId', diaryId);
-    //     // formData.append('contents', JSON.stringify(contents));
-
-    //     const response = await axios.post('http://54.180.238.52:3000/user/saveDiary', formData, {
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data'
-    //         }
-    //     });
-
-    //     if (response.data.message) {
-    //         alert('일지가 성공적으로 저장되었습니다.');
-    //         location.href = '../travel_diary.html'
-    //     } else {
-    //         console.error('Error saving diary:', response.data.message);
-    //     }
-    // } catch (error) {
-    //     console.error('Error saving diary:', error);
-    //     alert('일지 저장 중 오류가 발생했습니다.');
-    // }
 };
 
 function displayUploadedImage(imageUrl) {
