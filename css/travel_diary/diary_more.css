@@ -25,10 +25,12 @@
     background-color: var(--bs-main-20);
 }
 .place-img { 
-    width: 90px;
-    height: 90px;
-    object-fit: cover;
+    width: 90px !important;
+    height: 90px !important;
+    min-width: 90px;
+    min-height: 90px;
     border-radius: 8px;
+    object-fit: cover !important;
 }
 
 .place-txt-container {
