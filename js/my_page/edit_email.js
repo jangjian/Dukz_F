@@ -54,6 +54,7 @@ function fetchAndLogUserInfo() {
     .then(response => {
         const userInfo = response.data;
         console.log('사용자 정보:', userInfo);
+        document.getElementById('email').value = userInfo.email;
     })
     .catch(error => {
         console.error('사용자 정보 불러오기 실패:', error);
