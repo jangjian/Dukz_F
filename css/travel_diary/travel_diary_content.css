@@ -27,6 +27,7 @@ body {
 /* card */
 .card-container {
     border-radius: 18px;
+    margin: 10px 0;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1), 0 0 8px 0 rgba(0, 0, 0, 0.05);
 }
 .place-title-container {
@@ -78,9 +79,6 @@ body {
     font-weight: var(--bs-font-regular);
     margin-left: 8px;
 }
-#place-name {
-    color: var(--bs-blue-87);
-}
 .review-container {
     margin: 2px 3px 0 3px;
     font-size: var(--bs-font-14px);
@@ -91,10 +89,10 @@ body {
 /* content-txt */
 .sub-title-txt {
     font-size: var(--bs-font-18px);
-    margin: 5px 0;
+    margin: 10px 0;
 }
 .content-txt {
-    margin: 5px 0;
+    margin: 10px 0;
     font-size: 14px;
     font-weight: var(--bs-font-light);
 }
