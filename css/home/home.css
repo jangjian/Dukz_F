@@ -176,8 +176,8 @@ body {
     font-size: var(--bs-font-12-5px);
     font-weight: var(--bs-font-light);
     color: var(--bs-black-64);
-    margin-top: 6px;
-    height: 40px;
+    margin-top: 3px;
+    height: 42px;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
