@@ -177,55 +177,54 @@ const addCardNews = (cardNewsId) => {
     `;
 
     containerDiv.appendChild(cardContainer);
+
+    // 로컬스토리지에 카드뉴스 아이디 저장
+    let storedCardNewsIds = JSON.parse(localStorage.getItem('cardNewsIds')) || [];
+    storedCardNewsIds.push(cardNewsId);
+    localStorage.setItem('cardNewsIds', JSON.stringify(storedCardNewsIds));
 }
 
 // 시간 변환 함수 수정
 function convertTimeToString(hours, minutes) {
     return `${hours}:${minutes}`;
 }
-let firstcardNewsId;
-// 카드 뉴스 저장 버튼 클릭 시 서버로 데이터 전송
+
 function saveCardNews() {
-    const place = document.getElementById("place").value;
-    const price = document.getElementById("yen-input").value;
-    const review = document.getElementById("review").value;
+    const formData = new FormData();
     const userid = localStorage.getItem("userid");
-    const hashtags = tagify.value.map(tag => tag.value);
 
     let open_time = convertTimeToString(HourStart, MinuteStart);
     let close_time = convertTimeToString(HourEnd, MinuteEnd);
 
-    formData.append('place', place);
+    formData.append('place', placeInput.value);
     formData.append('open_time', open_time);
     formData.append('close_time', close_time);
-    formData.append('price', price);
-    formData.append('card_review', review);
+    formData.append('price', yenInput.value);
+    formData.append('card_review', reviewInput.value);
     formData.append('userid', userid);
     formData.append('star', selectedStarRating);
-    formData.append('hashtags', JSON.stringify(hashtags));
+    formData.append('hashtags', JSON.stringify(tagify.value.map(tag => tag.value)));
+
+    formData.append('images', imageInput.files[0]); 
 
     axios.post("http://54.180.238.52:3000/user/saveCardNews", formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
     })
-        .then((response) => {
-            console.log("Card news saved:", response.data);
-            firstcardNewsId = response.data.cardNewsId;
-
-            // `localStorage`에 저장된 `cardNewsIds` 배열을 업데이트
-            let cardNewsIds = JSON.parse(localStorage.getItem('cardNewsIds')) || [];
-            cardNewsIds.push(firstcardNewsId);
-            localStorage.setItem('cardNewsIds', JSON.stringify(cardNewsIds));
-
-            addCardNews(firstcardNewsId);
-            resetModalContent();
-        })
-        .catch((error) => {
-            console.error("Error saving card news:", error);
-            alert("카드 뉴스 저장 중 에러가 발생했습니다.");
-        });
+    .then((response) => {
+        console.log("Card news saved:", response.data);
+        const cardNewsId = response.data.cardNewsId;
+    
+        addCardNews(cardNewsId); 
+        resetModalContent(); 
+    })
+    .catch((error) => {
+        console.error("Error saving card news:", error);
+        alert("카드 뉴스 저장 중 에러가 발생했습니다.");
+    });
 }
+
 
 document.getElementById('cardSaveBtn').addEventListener('click', saveCardNews);
 
