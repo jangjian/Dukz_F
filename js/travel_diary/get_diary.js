@@ -19,6 +19,7 @@ function getName() {
 }
 
 const writeDiv = document.getElementsByClassName('write-container')[0];
+const diaryId = localStorage.getItem("diaryId");
 
 function getDiary() {
     const diaryId = localStorage.getItem("diaryId");
@@ -133,5 +134,6 @@ function getDiary() {
         writeDiv.appendChild(cardDiv)
     }
 }
+
 
 getDiary();
