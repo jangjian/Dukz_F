@@ -183,7 +183,7 @@ const addCardNews = (cardNewsId) => {
 function convertTimeToString(hours, minutes) {
     return `${hours}:${minutes}`;
 }
-
+let firstcardNewsId;
 // 카드 뉴스 저장 버튼 클릭 시 서버로 데이터 전송
 function saveCardNews() {
     const place = document.getElementById("place").value;
@@ -211,14 +211,14 @@ function saveCardNews() {
     })
         .then((response) => {
             console.log("Card news saved:", response.data);
-            const cardNewsId = response.data.cardNewsId;
+            firstcardNewsId = response.data.cardNewsId;
 
             // `localStorage`에 저장된 `cardNewsIds` 배열을 업데이트
             let cardNewsIds = JSON.parse(localStorage.getItem('cardNewsIds')) || [];
-            cardNewsIds.push(cardNewsId);
+            cardNewsIds.push(firstcardNewsId);
             localStorage.setItem('cardNewsIds', JSON.stringify(cardNewsIds));
 
-            addCardNews(cardNewsId);
+            addCardNews(firstcardNewsId);
             resetModalContent();
         })
         .catch((error) => {

@@ -1,17 +1,23 @@
 const containerDiv = document.getElementsByClassName('right-container')[0];
-let formData = new FormData();
+
+
+let diaryId = localStorage.getItem('diaryId');
+
+const formData = new FormData();
+
+let diaryFormData = [];
 
 const textOnChange = () => {
     const subInputValue = document.querySelector('input[name="sub-input-text"]:checked').value;
     let txtDiv = document.createElement('textarea');
 
-    switch(subInputValue) {
-        case "sub-title": 
-            txtDiv.className = 'sub-title-txt input-content'; 
+    switch (subInputValue) {
+        case "sub-title":
+            txtDiv.className = 'sub-title-txt input-content';
             txtDiv.placeholder = '부제목을 입력해주세요';
             break;
-        case "content": 
-            txtDiv.className = 'content-txt input-content'; 
+        case "content":
+            txtDiv.className = 'content-txt input-content';
             txtDiv.placeholder = '본문을 입력해주세요';
             break;
     }
@@ -28,12 +34,17 @@ const textOnChange = () => {
 };
 
 document.querySelectorAll('.text-container > .size-group input').forEach(input => {
-    input.addEventListener('click', function(event) {
+    input.addEventListener('click', function (event) {
         event.stopPropagation();
         textOnChange();
     });
 });
 
+let nowAlign = 'left';
+
+let imageSrcArr = [];
+
+let imageFileArr = []
 const imageOnChange = (event) => {
     const reader = new FileReader();
     const image = document.createElement('img');
@@ -43,113 +54,121 @@ const imageOnChange = (event) => {
     image.className = 'image-file input-content';  // input-content 클래스 추가
     containerDiv.appendChild(image);
 
-    // formData에 이미지 추가
-    formData.append('images', event.target.files[0]);
+    imageFileArr.push(event.target.files[0]);
 
     reader.readAsDataURL(event.target.files[0]);
 };
 
+
 const alignOnChange = () => {
     const subInputValue = document.querySelector('input[name="sub-input-align"]:checked').value;
     const inputContainer = document.getElementsByClassName('input-content');
-    switch(subInputValue) {
-        case "left": 
+    switch (subInputValue) {
+        case "left":
             for (let x of inputContainer) {
-                x.style.textAlign = "left"; 
+                x.style.textAlign = "left";
+                nowAlign = 'left';
             }
             break;
         case "center":
             for (let x of inputContainer) {
-                x.style.textAlign = "center"; 
+                x.style.textAlign = "center";
+                nowAlign = 'center'
             }
             break;
-        case "right": 
+        case "right":
             for (let x of inputContainer) {
-                x.style.textAlign = "right"; 
+                x.style.textAlign = "right";
+                nowAlign = 'right'
             }
             break;
     }
 };
 
 const saveDiary = async () => {
-    const diaryId = localStorage.getItem('diaryId');
-    const contents = [];
 
     // 유효성 검사
-    if (document.getElementsByClassName('title-txt')[0].value == '') {
-        alert('제목을 입력해주세요');
-        return;
-    } else if (document.getElementsByClassName('content-txt')[0] == undefined
-                || document.getElementsByClassName('content-txt')[0].value == '') {
-        alert('하나 이상의 본문을 입력해주세요');
-        return;
-    } else if (document.getElementsByClassName('card-container')[0] == undefined) {
-        alert('하나 이상의 일정을 입력해 주세요');
-        return;
-    }
+    // if (document.getElementsByClassName('title-txt')[0].value == '') {
+    //     alert('제목을 입력해주세요');
+    //     return;
+    // } else if (document.getElementsByClassName('content-txt')[0] == undefined
+    //     || document.getElementsByClassName('content-txt')[0].value == '') {
+    //     alert('하나 이상의 본문을 입력해주세요');
+    //     return;
+    // } else if (document.getElementsByClassName('card-container')[0] == undefined) {
+    //     alert('하나 이상의 일정을 입력해 주세요');
+    //     return;
+    // }
 
     const contentElements = document.querySelectorAll('.input-content, .card-container');
 
+    let imageFileArrCount = 0;
     contentElements.forEach(element => {
-        let contentType;
-        let contentText = '';
+        let contentType = '';
+        let content = '';
+        let imageSrc = null;
+        let cardNewsId = null;
 
         if (element.classList.contains('title-txt')) {
             contentType = 'title';
-            contentText = element.value;
+            content = element.value;
         } else if (element.classList.contains('sub-title-txt')) {
             contentType = 'subtitle';
-            contentText = element.value;
+            content = element.value;
         } else if (element.classList.contains('content-txt')) {
             contentType = 'content';
-            contentText = element.value;
+            content = element.value;
         } else if (element.classList.contains('image-file')) {
             contentType = 'image';
+            imageSrc = imageFileArr[imageFileArrCount];
+            imageFileArrCount++;
         } else if (element.classList.contains('card-container')) {
             contentType = 'cardNews';
-            contents.push({
-                contentType: contentType,
-                align: element.style.textAlign || 'left',
-                cardNewsId: element.getAttribute('data-card-news-id')
-            });
-            return;
+            cardNewsId = firstcardNewsId;
         } else {
             return;
         }
-        contents.push({
+        
+        diaryFormData.push(
+        {
+            diaryId: diaryId,
             contentType: contentType,
-            contentText: contentText,
-            align: element.style.textAlign || 'left'
-        });
+            content: content,
+            align: nowAlign,
+            imageSrc: imageSrc,
+            cardNewsId: cardNewsId
+        })
     });
 
+    console.log(diaryFormData);
 
-    try {
-        formData.append('diaryId', diaryId);
-        formData.append('contents', JSON.stringify(contents));
 
-        const response = await axios.post('http://54.180.238.52:3000/user/saveDiary', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
+    // try {
+    //     // formData.append('diaryId', diaryId);
+    //     // formData.append('contents', JSON.stringify(contents));
 
-        if (response.data.message) {
-            alert('일지가 성공적으로 저장되었습니다.');
-            location.href = '../travel_diary.html'
-        } else {
-            console.error('Error saving diary:', response.data.message);
-        }
-    } catch (error) {
-        console.error('Error saving diary:', error);
-        alert('일지 저장 중 오류가 발생했습니다.');
-    }
+    //     const response = await axios.post('http://54.180.238.52:3000/user/saveDiary', formData, {
+    //         headers: {
+    //             'Content-Type': 'multipart/form-data'
+    //         }
+    //     });
+
+    //     if (response.data.message) {
+    //         alert('일지가 성공적으로 저장되었습니다.');
+    //         location.href = '../travel_diary.html'
+    //     } else {
+    //         console.error('Error saving diary:', response.data.message);
+    //     }
+    // } catch (error) {
+    //     console.error('Error saving diary:', error);
+    //     alert('일지 저장 중 오류가 발생했습니다.');
+    // }
 };
 
 function displayUploadedImage(imageUrl) {
     const Img = document.createElement('img');
     Img.src = `http://54.180.238.52:3000${imageUrl}`;
-    containerDiv.appendChild(Img); 
+    containerDiv.appendChild(Img);
 }
 
 document.getElementById('upload').addEventListener('click', saveDiary);
