@@ -84,6 +84,7 @@ const alignOnChange = () => {
             break;
     }
 };
+    
 
 const saveDiary = async () => {
     let imageFileArrCount = 0;
@@ -93,7 +94,7 @@ const saveDiary = async () => {
 
     const contentElements = document.querySelectorAll('.input-content, .card-container');
 
-        // 유효성 검사
+    /// 유효성 검사
     if (document.getElementsByClassName('title-txt')[0].value == '') {
         alert('제목을 입력해주세요');
         return;
@@ -105,9 +106,9 @@ const saveDiary = async () => {
         alert('하나 이상의 일정을 입력해 주세요');
         return;
     }
-    
-    imageFileArr.forEach(imageFile => formData.append('images', imageFile))
-    
+
+    imageFileArr.forEach(imageFile => formData.append('images', imageFile));
+
     contentElements.forEach(element => {
         let contentType = '';
         let contentText = '';
@@ -129,23 +130,21 @@ const saveDiary = async () => {
             imageFileArrCount++;
         } else if (element.classList.contains('card-container')) {
             contentType = 'cardNews';
-            cardNewsId = firstcardNewsId;
+            cardNewsId = element.getAttribute('data-card-news-id');
         } else {
             return;
         }
-        
-        diaryFormData.push(
-        {
+
+        diaryFormData.push({
             diaryId: diaryId,
             contentType: contentType,
             contentText: contentText,
             align: nowAlign,
             images: imageSrc,
-            cardNewsId: cardNewsId
-        })
-
-        console.log(diaryFormData);
+            cardNewsId: cardNewsId 
+        });
     });
+
     formData.append('contents', JSON.stringify(diaryFormData));
 
     try {
@@ -165,11 +164,8 @@ const saveDiary = async () => {
         console.error('Error saving diary:', error);
         alert('일지 저장 중 오류가 발생했습니다.');
     }
-
-    return;
-
-
 };
+    
 
 function displayUploadedImage(imageUrl) {
     const Img = document.createElement('img');
