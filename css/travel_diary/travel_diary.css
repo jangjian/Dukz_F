@@ -1,6 +1,3 @@
-body {
-    padding-bottom: 120px;
-}
 .top-container,
 .make-diary-container {
     background-color: var(--bs-main-20);
@@ -205,4 +202,5 @@ body {
     font-weight: var(--bs-font-regular);
     font-size: var(--bs-font-11px);
     float: right;
+    padding-bottom: 100px;
 }

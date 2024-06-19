@@ -1,7 +1,6 @@
-body {
-    padding-bottom: 95px;
+.container {
+    padding-bottom: 100px;
 }
-
 .hot-slide-container {
     height: 310px;
     width: 250px;
