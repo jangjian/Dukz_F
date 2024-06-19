@@ -19,3 +19,19 @@ function addDisabled(obj) {
     obj.setAttribute("disabled", "disabled");
     obj.classList.add('disabled');
 }
+function fetchAndLogUserInfo() {
+    const userid = localStorage.getItem('userid'); 
+    
+    axios.post('http://54.180.238.52:3000/user/getUserInfo', {
+      userid : userid
+    })
+    .then(response => {
+        const userInfo = response.data;
+        console.log('사용자 정보:', userInfo);
+    })
+    .catch(error => {
+        console.error('사용자 정보 불러오기 실패:', error);
+    });
+  }
+  
+  fetchAndLogUserInfo();
