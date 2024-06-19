@@ -11,6 +11,8 @@ function removeHidden(obj) {
     obj.classList.remove('hidden');
 }
 
+let userInfo;
+
 function removeDisabled(obj) {
     obj.removeAttribute("disabled");
     obj.classList.remove('disabled');
@@ -20,18 +22,21 @@ function addDisabled(obj) {
     obj.classList.add('disabled');
 }
 function fetchAndLogUserInfo() {
-    const userid = localStorage.getItem('userid'); 
-    
+    const userid = localStorage.getItem('userid');
+
     axios.post('http://54.180.238.52:3000/user/getUserInfo', {
-      userid : userid
+        userid: userid
     })
-    .then(response => {
-        const userInfo = response.data;
-        console.log('사용자 정보:', userInfo);
-    })
-    .catch(error => {
-        console.error('사용자 정보 불러오기 실패:', error);
-    });
-  }
-  
-  fetchAndLogUserInfo();
+        .then(response => {
+            userInfo = response.data;
+            if (document.getElementById('userIdInput')) {
+                document.getElementById('userIdInput').value = userInfo.userid
+            }
+            console.log('사용자 정보:', userInfo);
+        })
+        .catch(error => {
+            console.error('사용자 정보 불러오기 실패:', error);
+        });
+}
+
+fetchAndLogUserInfo();
