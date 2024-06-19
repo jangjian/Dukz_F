@@ -4,7 +4,9 @@
     justify-content: center;
     height: 100vh;
 }
-
+.logo-img {
+    padding: 2px 2px;
+}
 .container-inside {
     text-align: center;
 }
