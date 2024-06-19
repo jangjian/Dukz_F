@@ -177,7 +177,7 @@ body {
     font-weight: var(--bs-font-light);
     color: var(--bs-black-64);
     margin-top: 6px;
-    height: 36px;
+    height: 40px;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
