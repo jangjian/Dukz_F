@@ -231,6 +231,9 @@
 #time {
     color: var(--bs-black-34);
 }
+#review {
+    text-align: left !important;
+}
 .review-container {
     margin: 10px 3px 0 3px;
     font-size: var(--bs-font-14px);
@@ -254,6 +257,7 @@
     border: none !important;
     padding: 0 0 !important;
     max-width: 120px;
+    text-align: left !important;;
 }
 #yen-txt {
     display: none;
