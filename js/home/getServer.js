@@ -1,4 +1,6 @@
 function getName() {
+    showLoadingBar();
+    
     const userid = localStorage.getItem("userid");
     const usernick = document.getElementsByClassName('user-nick');
 
@@ -220,6 +222,8 @@ function getDiary() {
         })
         .catch((e) => {
             console.log("Error retrieving recommended diaries:", e);
+        }).finally(() => {
+            hideLoadingBar();
         });
 }
 
