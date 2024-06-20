@@ -1,16 +1,18 @@
 function getName() {
+    showLoadingBar();
+    
     const userid = localStorage.getItem("userid");
     const usernick = document.getElementsByClassName('user-nick');
 
-    return axios
-        .post("http://54.180.238.52:3000/user/getName", { userid })
+    axios
+        .post("http://54.180.238.52:3000/user/getName", {
+            userid
+        })
         .then((response) => {
             const name = response.data.name;
 
-            for (let i = 0; i < usernick.length; i++) {
-                if (usernick[i]) {
-                    usernick[i].innerHTML = name;
-                }
+            for (let i in usernick) {
+                usernick[i].innerHTML = name;
             }
 
             console.log("User name retrieved:", name);
@@ -23,7 +25,11 @@ function getName() {
 function formatDate(dateString) {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     const dateObject = new Date(dateString);
-    return dateObject.toLocaleDateString('ko-KR', options).split('.').join('.');
+
+    const formattedDate = dateObject.toLocaleDateString('ko-KR', options)
+        .split('.').join('.');
+
+    return formattedDate;
 }
 
 let firstCardNews;
@@ -62,7 +68,7 @@ function getCardNews() {
     let cardNewsTime3 = document.getElementById("cardNewsTime3");
     let cardNewsPrice3 = document.getElementById("cardNewsPrice3");
 
-    return axios
+    axios
         .get("http://54.180.238.52:3000/user/getCardNews")
         .then((response) => {
             firstCardNews = response.data[0];
@@ -96,25 +102,18 @@ function getCardNews() {
                 spanTag.textContent = `#${tag}`;
                 hashtagContainer3.appendChild(spanTag);
             });
-
             const firstBookmark = document.getElementById('first-bookmark');
             const secondBookmark = document.getElementById('second-bookmark');
             const thirdBookmark = document.getElementById('third-bookmark');
-            if (firstBookmark) {
-                firstBookmark.addEventListener('click', (event) => {
-                    bookmarkChk(event, firstBookmark, firstCardNews.cardNews.cardNewsId);
-                });
-            }
-            if (secondBookmark) {
-                secondBookmark.addEventListener('click', (event) => {
-                    bookmarkChk(event, secondBookmark, secondCardNews.cardNews.cardNewsId);
-                });
-            }
-            if (thirdBookmark) {
-                thirdBookmark.addEventListener('click', (event) => {
-                    bookmarkChk(event, thirdBookmark, thirdCardNews.cardNews.cardNewsId);
-                });
-            }
+            firstBookmark.addEventListener('click', (event) => {
+                bookmarkChk(event, firstBookmark, firstCardNews.cardNews.cardNewsId);
+            });
+            secondBookmark.addEventListener('click', (event) => {
+                bookmarkChk(event, secondBookmark, secondCardNews.cardNews.cardNewsId);
+            });
+            thirdBookmark.addEventListener('click', (event) => {
+                bookmarkChk(event, thirdBookmark, thirdCardNews.cardNews.cardNewsId);
+            });
 
             function setImage(imgElement, imageUrl) {
                 if (!imageUrl || imageUrl.trim() === "" || imageUrl === "/default-profile-image.jpg") {
@@ -150,6 +149,7 @@ function getCardNews() {
             cardNewsLocation3.textContent = thirdCardNews.cardNews.place;
             cardNewsTime3.textContent = `${thirdCardNews.cardNews.open_time} ~ ${thirdCardNews.cardNews.close_time}`;
             cardNewsPrice3.textContent = `${thirdCardNews.cardNews.price}円`;
+
         })
         .catch((error) => {
             console.error("Error retrieving card news:", error);
@@ -159,8 +159,10 @@ function getCardNews() {
 function getDiary() {
     const userid = localStorage.getItem("userid");
 
-    return axios
-        .post("http://54.180.238.52:3000/user/getRecommendedDiaries", { userid })
+    axios
+        .post("http://54.180.238.52:3000/user/getRecommendedDiaries", {
+            userid: userid
+        })
         .then((response) => {
             const recommendedDiaries = response.data.recommendedDiaries;
 
@@ -168,27 +170,30 @@ function getDiary() {
 
             const placeSecondDiv = document.getElementsByClassName('place-second')[0];
             const placeThirdDiv = document.getElementsByClassName('place-third')[0];
+            // const placeMoreDiv = document.getElementsByClassName('place-more')[0];
 
             switch (recommendedDiaries.length) {
                 case 1:
                     placeSecondDiv.style.display = 'none';
                     placeThirdDiv.style.display = 'none';
+                    // placeMoreDiv.style.display = 'none';
                     break;
                 case 2:
                     placeThirdDiv.style.display = 'none';
+                    // placeMoreDiv.style.display = 'none';
                     break;
             }
 
             if (Array.isArray(recommendedDiaries)) {
                 recommendedDiaries.forEach((diaryGroup, index) => {
                     if (index >= 3) return;
-
+                    
                     const placeContainerClass = `.place-container.place-${["first", "second", "third"][index]}`;
 
                     const titleContent = diaryGroup.contents.find(diary => diary.contentType === 'title');
                     const firstContent = diaryGroup.contents.find(diary => diary.contentType === 'content');
                     const firstImage = diaryGroup.contents.find(diary => diary.contentType === 'image');
-                    const diaryId = diaryGroup.diaryId;
+                    const diaryId = diaryGroup.diaryId; // Assuming diaryId is available in each group
 
                     if (titleContent) {
                         const titleElement = document.querySelector(`${placeContainerClass} .place-title`);
@@ -221,6 +226,7 @@ function getDiary() {
                     regionHashSpan.innerHTML = `#${diaryGroup.region}`;
                     placeTagDiv.appendChild(regionHashSpan);
 
+                    // Update onclick handler to include diaryId
                     const placeContainer = document.querySelector(placeContainerClass);
                     if (placeContainer) {
                         placeContainer.setAttribute('onclick', `getDiaryId('${diaryId}'); location.href='../travel_diary/travel_diary_content.html'`);
@@ -232,6 +238,8 @@ function getDiary() {
         })
         .catch((e) => {
             console.log("Error retrieving recommended diaries:", e);
+        }).finally(() => {
+            hideLoadingBar();
         });
 }
 
@@ -239,12 +247,6 @@ function getDiaryId(diaryId) {
     localStorage.setItem('diaryId', diaryId);
 }
 
-const asynchronousPromise = async () => {
-    await Promise.all([getName(), getCardNews(), getDiary()])
-    .then(() => {
-        setTimeout(() => {
-            hideLoadingBar();
-        }, 300);
-    });
-};
-asynchronousPromise().then(() => { });
+getName();
+getCardNews();
+getDiary();
