@@ -1,4 +1,6 @@
 function getName() {
+    showLoadingBar();
+    
     const userid = localStorage.getItem("userid");
     const usernick = document.getElementsByClassName('user-nick');
 
@@ -73,6 +75,10 @@ function getCardNews() {
             secondCardNews = response.data[1];
             thirdCardNews = response.data[2];
 
+            console.log(firstCardNews.cardNews.cardNewsId);
+            console.log(secondCardNews.cardNews.cardNewsId);
+            console.log(thirdCardNews.cardNews.cardNewsId);
+
             const hashtagContainer = document.querySelector(".hashtag-container");
             hashtagContainer.innerHTML = "";
             firstCardNews.hashtags.forEach((tag) => {
@@ -95,6 +101,18 @@ function getCardNews() {
                 const spanTag = document.createElement("span");
                 spanTag.textContent = `#${tag}`;
                 hashtagContainer3.appendChild(spanTag);
+            });
+            const firstBookmark = document.getElementById('first-bookmark');
+            const secondBookmark = document.getElementById('second-bookmark');
+            const thirdBookmark = document.getElementById('third-bookmark');
+            firstBookmark.addEventListener('click', (event) => {
+                bookmarkChk(event, firstBookmark, firstCardNews.cardNews.cardNewsId);
+            });
+            secondBookmark.addEventListener('click', (event) => {
+                bookmarkChk(event, secondBookmark, secondCardNews.cardNews.cardNewsId);
+            });
+            thirdBookmark.addEventListener('click', (event) => {
+                bookmarkChk(event, thirdBookmark, thirdCardNews.cardNews.cardNewsId);
             });
 
             function setImage(imgElement, imageUrl) {
@@ -220,6 +238,8 @@ function getDiary() {
         })
         .catch((e) => {
             console.log("Error retrieving recommended diaries:", e);
+        }).finally(() => {
+            hideLoadingBar();
         });
 }
 

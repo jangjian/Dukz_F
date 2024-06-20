@@ -79,6 +79,7 @@
     font-size: var(--bs-font-16px);
     font-weight: var(--bs-font-bold);
     text-overflow: ellipsis;
+    text-align: left;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
