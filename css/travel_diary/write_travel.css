@@ -2,6 +2,11 @@
     text-align: center;
     padding-bottom: 40px;
 }
+.fix-container {
+    position: fixed;
+    width: 100%;
+    background-color: var(--bs-white);
+}
 .title {
     margin: 20px 20px 0px 20px;
     font-size: var(--bs-font-22px);
@@ -82,7 +87,7 @@
 
 /* content-container */
 .content-container {
-    margin: 0px 20px;
+    padding: 180px 20px 0px 20px;
 }
 
 /* 글자 */
@@ -152,7 +157,7 @@
     border-radius: 10px;
 }
 #card-news-modal {
-    padding-top: 100px; 
+    padding-top: 50px;
     display: none;
 }
 .card-image-container {
