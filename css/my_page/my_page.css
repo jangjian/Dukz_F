@@ -3,11 +3,24 @@ body {
 }
 .user-profile-container {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.user-profile-div {
+    display: flex;
     height: calc(90px - 40px);
     width: fit-content;
     padding: 20px 20px;
     align-items: center;
     margin-bottom: 16px;
+}
+.logOut {
+    border-radius: 8px;
+    padding: 5px 8px;
+    margin: 0 20px 15px 0;
+    border: 1px solid var(--bs-red-1);
+    background-color: var(--bs-white);
+    color: var(--bs-red-1);
 }
 
 .profile-img {
