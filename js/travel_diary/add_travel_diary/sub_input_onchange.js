@@ -11,8 +11,6 @@ const textOnchange = (event, str) => {
     event.stopPropagation();
     let txtDiv = document.createElement('textarea');
 
-    console.log('dd')
-
     switch (str) {
         case "sub-title":
             txtDiv.className = 'sub-title-txt input-content';
