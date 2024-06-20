@@ -17,6 +17,7 @@ function getAllDiaries() {
             const diaryId = diaries[i].diaryId;
     
             for (let x of diaries[i].contents) {
+                console.log(x)
                 switch (x.contentType) {
                     case "title":
                         if (resTitle == '제목이 없어요!') resTitle = x.content;
@@ -29,6 +30,17 @@ function getAllDiaries() {
                         break;
                 }
             }
+            // let resTitle = diaries[i].contents.find(diary => diary.contentType == 'title')
+            // if (resTitle == undefined) resTitle = '제목이 없어요!';
+            // else resTitle = resTitle.content;
+
+            // let resContent = diaries[i].contents.find(diary => diary.contentType == 'content');
+            // if (resContent == undefined) resContent = '본문이 없어요!';
+            // else resContent = resContent.content;
+            
+            // let resImage = diaries[i].contents.find(diary => diary.contentType == 'image');
+            // if (resImage == undefined) resImage = '../../Image/dukduk/nothing.svg';
+            // else resImage = `http://54.180.238.52:3000${resImage.imageSrc}`;
     
             const gridItemDiv = document.createElement('div');
             gridItemDiv.classList.add('grid-item-diary-container');
@@ -83,7 +95,7 @@ function getUserDiary() {
         
         const diaries = response.data.사용자의_일지;
         let userDiaryLen = response.data.사용자의_일지.length;
-        for (let i = userDiaryLen - 1; i >= userDiaryLen - 3; i--) {
+        for (let i = userDiaryLen - 1; i >= userDiaryLen - 2; i--) {
             if (diaries[i] == undefined) return;
             
             let resTitle = '제목이 없어요!';
