@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,18 @@
     <link rel="stylesheet" href="../../css/my_page/my_page.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
+
 <body>
 
     <div class="container">
         <div class="user-profile-container">
-            <img id="profile-image" class="profile-img" src="../../Image/profile/profile_img_default.svg">
-            <div class="profile-txt"><span class="user-nick">우끼끼</span>님</div>
-            <img class="profile-edit" src="../../Image/icon/my_page/pen.svg" onclick="location.href='./edit_profile.html'">
+            <div class="user-profile-div">
+                <img id="profile-image" class="profile-img" src="../../Image/profile/profile_img_default.svg">
+                <div class="profile-txt"><span class="user-nick">우끼끼</span>님</div>
+                <img class="profile-edit" src="../../Image/icon/my_page/pen.svg"
+                    onclick="location.href='./edit_profile.html'">
+            </div>
+            <button class="logOut" onclick="location.href='../../../index.html'">로그아웃</button>
         </div>
         <div class="show-info-container">
             <div class="info-container" onclick="location.href='./my_info.html'">
@@ -62,7 +68,8 @@
             <img class="nav-img" src="../../Image/navbar/un_selected/home.svg">
             <div class="nav-text">홈</div>
         </div>
-        <div class="travel-diary-container nav-sub-container" onclick="location.href='../travel_diary/travel_diary.html'">
+        <div class="travel-diary-container nav-sub-container"
+            onclick="location.href='../travel_diary/travel_diary.html'">
             <img class="nav-img" src="../../Image/navbar/un_selected/travel_diary.svg">
             <div class="nav-text">여행일지</div>
         </div>
@@ -76,6 +83,7 @@
         </div>
     </div>
 </body>
+
 </html>
 
 <script src="../../js/sign/my_page.js"></script>
