@@ -29,6 +29,7 @@ const textOnchange = (event, str) => {
         target.style.height = 0;
         target.style.height = target.scrollHeight + 'px';
     };
+    txtDiv.focus();
 
     alignOnChange();
 };
