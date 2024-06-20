@@ -15,70 +15,72 @@
 
 <body>
     <div class="container">
-        <div class="title">
-            <div class="upload-container">
-                <a id="upload">발행하기</a>
+        <div class="fix-container">
+            <div class="title">
+                <div class="upload-container">
+                    <a id="upload">발행하기</a>
+                </div>
+                일지를 기록해주세요!
             </div>
-            일지를 기록해주세요!
-        </div>
-        <div class="input-container" onchange="input_onchange()">
-            <label class="radio-group">
-                <input type="radio" name="input" value="text" checked>
-                <span>글자</span>
-            </label>
-            <label class="radio-group">
-                <input type="radio" name="input" value="image">
-                <span>사진</span>
-            </label>
-            <label class="radio-group">
-                <input type="radio" name="input" value="align">
-                <span>정렬</span>
-            </label>
-            <label class="radio-group" onclick="create_plan_onClick()">
-                <input type="button" name="input" value="create-plan">
-                <span>일정 만들기</span>
-            </label>
-            <label class="radio-group">
-                <input type="radio" name="input" value="import-plan">
-                <span>일정 가져오기</span>
-            </label>
-        </div>
-        <div class="sub-input-container">
-            <div class="text-container">
-                <label class="size-group">
-                    <input type="radio" name="sub-input-text" value="sub-title">
-                    <span>부제목</span>
+            <div class="input-container" onchange="input_onchange()">
+                <label class="radio-group">
+                    <input type="radio" name="input" value="text" checked>
+                    <span>글자</span>
                 </label>
-                <label class="size-group">
-                    <input type="radio" name="sub-input-text" value="content">
-                    <span>본문</span>
+                <label class="radio-group">
+                    <input type="radio" name="input" value="image">
+                    <span>사진</span>
+                </label>
+                <label class="radio-group">
+                    <input type="radio" name="input" value="align">
+                    <span>정렬</span>
+                </label>
+                <label class="radio-group" onclick="create_plan_onClick()">
+                    <input type="button" name="input" value="create-plan">
+                    <span>일정 만들기</span>
+                </label>
+                <label class="radio-group">
+                    <input type="radio" name="input" value="import-plan">
+                    <span>일정 가져오기</span>
                 </label>
             </div>
-            <div class="image-container hidden">
-                <label class='size-group'>
-                    <input type="file" style="display: none;">
-                    <button class="image-btn"><img src='../../../Image/icon/camera/camera.svg'></button>
-                </label>
-                <label class='size-group'>
-                    <input type="file" id="image-upload-2" accept="image/*" style="display: none;"
-                        onchange="imageOnChange(event)">
-                    <button class="image-btn" onclick="document.getElementById('image-upload-2').click();"><img
-                            src='../../../Image/icon/camera/image.svg'></button>
-                </label>
-            </div>
-            <div class="align-container hidden" onchange="alignOnChange()">
-                <label class='size-group'>
-                    <input type='radio' name='sub-input-align' value='left' checked>
-                    <span><img src='../../../Image/icon/align/left.svg'></span>
-                </label>
-                <label class='size-group'>
-                    <input type='radio' name='sub-input-align' value='center'>
-                    <span><img src='../../../Image/icon/align/center.svg'></span>
-                </label>
-                <label class='size-group'>
-                    <input type='radio' name='sub-input-align' value='right'>
-                    <span><img src='../../../Image/icon/align/right.svg'></span>
-                </label>
+            <div class="sub-input-container">
+                <div class="text-container">
+                    <label class="size-group">
+                        <input type="radio" name="sub-input-text" value="sub-title">
+                        <span>부제목</span>
+                    </label>
+                    <label class="size-group">
+                        <input type="radio" name="sub-input-text" value="content">
+                        <span>본문</span>
+                    </label>
+                </div>
+                <div class="image-container hidden">
+                    <label class='size-group'>
+                        <input type="file" style="display: none;">
+                        <button class="image-btn"><img src='../../../Image/icon/camera/camera.svg'></button>
+                    </label>
+                    <label class='size-group'>
+                        <input type="file" id="image-upload-2" accept="image/*" style="display: none;"
+                            onchange="imageOnChange(event)">
+                        <button class="image-btn" onclick="document.getElementById('image-upload-2').click();"><img
+                                src='../../../Image/icon/camera/image.svg'></button>
+                    </label>
+                </div>
+                <div class="align-container hidden" onchange="alignOnChange()">
+                    <label class='size-group'>
+                        <input type='radio' name='sub-input-align' value='left' checked>
+                        <span><img src='../../../Image/icon/align/left.svg'></span>
+                    </label>
+                    <label class='size-group'>
+                        <input type='radio' name='sub-input-align' value='center'>
+                        <span><img src='../../../Image/icon/align/center.svg'></span>
+                    </label>
+                    <label class='size-group'>
+                        <input type='radio' name='sub-input-align' value='right'>
+                        <span><img src='../../../Image/icon/align/right.svg'></span>
+                    </label>
+                </div>
             </div>
         </div>
         <div class="content-container">
