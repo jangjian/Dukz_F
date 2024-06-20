@@ -157,7 +157,7 @@
     border-radius: 10px;
 }
 #card-news-modal {
-    /* padding-top: 100px;  */
+    padding-top: 50px;
     display: none;
 }
 .card-image-container {
