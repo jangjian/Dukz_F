@@ -7,11 +7,12 @@ const formData = new FormData();
 
 let diaryFormData = [];
 
-const textOnChange = () => {
-    const subInputValue = document.querySelector('input[name="sub-input-text"]:checked').value;
+const textOnchange = (str) => {
     let txtDiv = document.createElement('textarea');
 
-    switch (subInputValue) {
+    console.log('dd')
+
+    switch (str) {
         case "sub-title":
             txtDiv.className = 'sub-title-txt input-content';
             txtDiv.placeholder = '부제목을 입력해주세요';
@@ -36,7 +37,7 @@ const textOnChange = () => {
 document.querySelectorAll('.text-container > .size-group input').forEach(input => {
     input.addEventListener('click', function (event) {
         event.stopPropagation();
-        textOnChange();
+        textOnchange('content');
     });
 });
 
@@ -111,8 +112,8 @@ const saveDiary = async () => {
         || document.getElementsByClassName('content-txt')[0].value == '') {
         alert('하나 이상의 본문을 입력해주세요');
         return;
-    } else if (document.getElementsByClassName('card-container')[0] == undefined) {
-        alert('하나 이상의 일정을 입력해 주세요');
+    } else if (document.getElementsByClassName('image-file')[0] == undefined) {
+        alert('하나 이상의 이미지를 입력해 주세요');
         return;
     }
 
