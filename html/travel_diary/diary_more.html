@@ -27,12 +27,15 @@
 
     <!-- modal -->
     <div class="modal-container">
-        <div class="recent-sort sort-div">
-            최근 순
+        <div class="recent-sort sort-div" onclick="recentSort()">
+            최신 순
         </div>
-        <div class="heart-sort sort-div">
+        <div class="old-sort sort-div" onclick="oldSort()">
+            오래된 순
+        </div>
+        <!-- <div class="heart-sort sort-div">
             좋아요 순
-        </div>
+        </div> -->
     </div>
 
     <!-- floating btn -->
@@ -41,4 +44,5 @@
 </body>
 </html>
 
+<script src="../../js/travel_diary/get_all_diary.js"></script>
 <script src="../../js/travel_diary/sort.js"></script>
