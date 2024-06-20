@@ -102,6 +102,18 @@ function getCardNews() {
                 spanTag.textContent = `#${tag}`;
                 hashtagContainer3.appendChild(spanTag);
             });
+            const firstBookmark = document.getElementById('first-bookmark');
+            const secondBookmark = document.getElementById('second-bookmark');
+            const thirdBookmark = document.getElementById('third-bookmark');
+            firstBookmark.addEventListener('click', (event) => {
+                bookmarkChk(event, firstBookmark, firstCardNews.cardNews.cardNewsId);
+            });
+            secondBookmark.addEventListener('click', (event) => {
+                bookmarkChk(event, secondBookmark, secondCardNews.cardNews.cardNewsId);
+            });
+            thirdBookmark.addEventListener('click', (event) => {
+                bookmarkChk(event, thirdBookmark, thirdCardNews.cardNews.cardNewsId);
+            });
 
             function setImage(imgElement, imageUrl) {
                 if (!imageUrl || imageUrl.trim() === "" || imageUrl === "/default-profile-image.jpg") {

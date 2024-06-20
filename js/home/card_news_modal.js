@@ -24,6 +24,11 @@ const openCardModal = (num) => {
     document.getElementById('modal-yen').innerHTML = `${nowCardNews.cardNews.price}円`;
     document.getElementById('review-span').innerHTML = nowCardNews.cardNews.card_review;
 
+    const modalBookMark = document.getElementById('modal-bookmark');
+    modalBookMark.addEventListener('click', (event) => {
+        bookmarkChk(event, modalBookMark, nowCardNews.cardNews.cardNewsId);
+    });
+
     for (let i = 1; i <= nowCardNews.cardNews.star; i++ ) {
         document.getElementById(`star${i}`).src = "../../../Image/icon/star/fill.svg"
     }
