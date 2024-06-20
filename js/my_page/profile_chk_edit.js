@@ -42,8 +42,13 @@ function fetchAndLogUserInfo() {
         defaultName = userInfo.name;
         nameInput.value = defaultName;
 
-        defaultImg = `http://54.180.238.52:3000${userInfo.image_url}`;
-        imgContainer.src = defaultImg;
+        const imageUrl = response.data.imageUrl;
+        console.log(imageUrl);
+        if (!imageUrl || imageUrl.trim() === "" || imageUrl === "/default-profile-image.jpg") {
+          useDefaultEdit();
+        } else {
+            imgContainer.src = `http://54.180.238.52:3000${imageUrl}`;
+        }
     })
     .catch(error => {
         console.error('사용자 정보 불러오기 실패:', error);
@@ -72,6 +77,7 @@ function uploadMyPageImage() {
         if (response.data.success) {
             const imageUrls = response.data.image_urls;
             console.log('Image URLs:', imageUrls);
+            window.history.back();
         } else {
             console.error('Image upload failed:', response.data.message);
         }
