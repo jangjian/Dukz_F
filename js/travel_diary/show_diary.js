@@ -2,6 +2,8 @@ const gridDiaryContainer = document.getElementsByClassName('grid-diary-container
 const swiperWrapperDiv = document.getElementsByClassName('swiper-wrapper')[0];
 
 function getAllDiaries() {
+    showLoadingBar();
+    
     axios.post("http://54.180.238.52:3000/user/getAllDiaries", {})
     .then((response) => {
         console.log('Successfully fetched diaries:', response.data.diaries);
@@ -10,36 +12,36 @@ function getAllDiaries() {
         for (let i = diariesLen - 1; i >= diariesLen - 4; i--) {
             if (diaries[i] == undefined) return;
     
-            let resTitle = '제목이 없어요!';
-            let resContent = '본문이 없어요!';
-            let resImage = '../../Image/dukduk/nothing.svg';
+            // let resTitle = '제목이 없어요!';
+            // let resContent = '본문이 없어요!';
+            // let resImage = '../../Image/dukduk/nothing.svg';
     
             const diaryId = diaries[i].diaryId;
     
-            for (let x of diaries[i].contents) {
-                switch (x.contentType) {
-                    case "title":
-                        resTitle = x.content;
-                        break;
-                    case "content":
-                        resContent = x.content;
-                        break;
-                    case "image":
-                        resImage = `http://54.180.238.52:3000${x.imageSrc}`;
-                        break;
-                }
-            }
-            // let resTitle = diaries[i].contents.find(diary => diary.contentType == 'title')
-            // if (resTitle == undefined) resTitle = '제목이 없어요!';
-            // else resTitle = resTitle.content;
+            // for (let x of diaries[i].contents) {
+            //     switch (x.contentType) {
+            //         case "title":
+            //             resTitle = x.content;
+            //             break;
+            //         case "content":
+            //             resContent = x.content;
+            //             break;
+            //         case "image":
+            //             resImage = `http://54.180.238.52:3000${x.imageSrc}`;
+            //             break;
+            //     }
+            // }
+            let resTitle = diaries[i].contents.find(diary => diary.contentType == 'title')
+            if (resTitle == undefined) resTitle = '제목이 없어요!';
+            else resTitle = resTitle.content;
 
-            // let resContent = diaries[i].contents.find(diary => diary.contentType == 'content');
-            // if (resContent == undefined) resContent = '본문이 없어요!';
-            // else resContent = resContent.content;
+            let resContent = diaries[i].contents.find(diary => diary.contentType == 'content');
+            if (resContent == undefined) resContent = '본문이 없어요!';
+            else resContent = resContent.content;
             
-            // let resImage = diaries[i].contents.find(diary => diary.contentType == 'image');
-            // if (resImage == undefined) resImage = '../../Image/dukduk/nothing.svg';
-            // else resImage = `http://54.180.238.52:3000${resImage.imageSrc}`;
+            let resImage = diaries[i].contents.find(diary => diary.contentType == 'image');
+            if (resImage == undefined) resImage = '../../Image/dukduk/nothing.svg';
+            else resImage = `http://54.180.238.52:3000${resImage.imageSrc}`;
     
             const gridItemDiv = document.createElement('div');
             gridItemDiv.classList.add('grid-item-diary-container');
@@ -81,7 +83,9 @@ function getAllDiaries() {
     })
         .catch((error) => {
             console.error('Error fetching diaries:', error);
-        });
+        }).finally(() => {
+            hideLoadingBar();
+          });
 }
 
 
@@ -97,23 +101,34 @@ function getUserDiary() {
         for (let i = userDiaryLen - 1; i >= userDiaryLen - 2; i--) {
             if (diaries[i] == undefined) return;
             
-            let resTitle = '제목이 없어요!';
-            let resContent = '본문이 없어요!';
-            let resImage = '../../Image/dukduk/nothing.svg';
+            // let resTitle = '제목이 없어요!';
+            // let resContent = '본문이 없어요!';
+            // let resImage = '../../Image/dukduk/nothing.svg';
     
-            for (let x of diaries[i].contents) {
-                switch (x.contentType) {
-                    case "title":
-                        resTitle = x.content;
-                        break;
-                    case "content":
-                        resContent = x.content;
-                        break;
-                    case "image":
-                        resImage = `http://54.180.238.52:3000${x.imageSrc}`;
-                        break;
-                }
-            }
+            // for (let x of diaries[i].contents) {
+            //     switch (x.contentType) {
+            //         case "title":
+            //             resTitle = x.content;
+            //             break;
+            //         case "content":
+            //             resContent = x.content;
+            //             break;
+            //         case "image":
+            //             resImage = `http://54.180.238.52:3000${x.imageSrc}`;
+            //             break;
+            //     }
+            // }
+            let resTitle = diaries[i].contents.find(diary => diary.contentType == 'title')
+            if (resTitle == undefined) resTitle = '제목이 없어요!';
+            else resTitle = resTitle.content;
+
+            let resContent = diaries[i].contents.find(diary => diary.contentType == 'content');
+            if (resContent == undefined) resContent = '본문이 없어요!';
+            else resContent = resContent.content;
+            
+            let resImage = diaries[i].contents.find(diary => diary.contentType == 'image');
+            if (resImage == undefined) resImage = '../../Image/dukduk/nothing.svg';
+            else resImage = `http://54.180.238.52:3000${resImage.imageSrc}`;
 
             const diaryId = diaries[i].diaryId;
     
