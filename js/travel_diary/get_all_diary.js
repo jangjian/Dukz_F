@@ -18,21 +18,21 @@ function getAllDiaries() {
 function renderDiaries(diaries) {
     allDiaryDiv.innerHTML = '';  // Clear existing diaries
     for (let i in diaries) {
-        let resImageSrc = '';
-        let resTitle = '';
-        let resContent = '';
+        let resImageSrc = "../../Image/dukduk/nothing.svg";
+        let resTitle = '제목이 없는 글이에요!';
+        let resContent = '내용이 없는 글이에요!';
 
         for (let con of diaries[i].contents) {
             switch (con.contentType) {
-                case "title": resTitle = con.content; break;
-                case "image": resImageSrc = `http://54.180.238.52:3000${con.imageSrc}`; break;
-                case "content": resContent = con.content; break;
+                case "title": if (resTitle == '제목이 없는 글이에요!') resTitle = con.content; break;
+                case "image": if (resImageSrc == '../../Image/dukduk/nothing.svg')resImageSrc = `http://54.180.238.52:3000${con.imageSrc}`; break;
+                case "content": if (resContent == '내용이 없는 글이에요!')resContent = con.content; break;
             }
         }
 
-        if (resTitle == '') resTitle = '제목이 없는 글이에요!';
-        if (resImageSrc == '') resImageSrc = "../../Image/dukduk/nothing.svg";
-        if (resContent == '') resContent = '내용이 없는 글이에요!';
+        // if (resTitle == '') resTitle = '제목이 없는 글이에요!';
+        // if (resImageSrc == '') resImageSrc = "../../Image/dukduk/nothing.svg";
+        // if (resContent == '') resContent = '내용이 없는 글이에요!';
 
         let placeDiv = document.createElement('div');
         placeDiv.classList.add('place-container');
