@@ -75,6 +75,10 @@ function getCardNews() {
             secondCardNews = response.data[1];
             thirdCardNews = response.data[2];
 
+            console.log(firstCardNews.cardNews.cardNewsId);
+            console.log(secondCardNews.cardNews.cardNewsId);
+            console.log(thirdCardNews.cardNews.cardNewsId);
+
             const hashtagContainer = document.querySelector(".hashtag-container");
             hashtagContainer.innerHTML = "";
             firstCardNews.hashtags.forEach((tag) => {
