@@ -9,9 +9,6 @@ function bookmarkChk(event, obj, cardNewsId) {
     }
 
     const userid = localStorage.getItem('userid');
-
-    console.log(userid, cardNewsId);
-
     axios.post('http://54.180.238.52:3000/user/addBookmark', {
         userid : userid,
         cardNewsId: cardNewsId,
@@ -20,6 +17,37 @@ function bookmarkChk(event, obj, cardNewsId) {
         console.log("북마크 저장 성공");
     })
     .catch((error) => {
-        console.error('북마크 업데이트 요청 중 오류 발생:', error);
+        if (error.response && error.response.status === 400) {
+            alert('이미 저장한 카드뉴스입니다.');
+        } else {
+            console.error('북마크 업데이트 요청 중 오류 발생:', error);
+        }
     });
 }
+
+function getBookmark() {
+    const userid = localStorage.getItem('userid');
+
+    axios.post('http://54.180.238.52:3000/user/getUserBookmarks', {
+        userid: userid
+    })
+    .then(response => {
+        const bookmarks = response.data.bookmarks;
+        console.log(bookmarks);
+
+        // cardNewsId 확인용 출력
+        bookmarks.forEach(bookmark => {
+            console.log('bookmark Card News ID:', bookmark.cardNewsId);
+        });
+    })
+    .catch(error => {
+        if (error.response && error.response.status === 400) {
+            console.error('이미 저장한 카드뉴스입니다.');
+        } else {
+            console.error('사용자 정보 불러오기 실패:', error);
+        }
+    });
+}
+
+getBookmark();
+

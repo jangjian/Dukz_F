@@ -46,7 +46,7 @@ function getBookmark() {
         userid: userid
     })
         .then(response => {
-            bookmarks = response.data.bookmarks;
+            bookmarks = response.data;
             console.log(bookmarks);
         })
         .catch(error => {
