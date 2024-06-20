@@ -15,7 +15,6 @@
 
 <body>
     <div class="container">
-        <div class="fix-container">
             <div class="title">
                 <div class="upload-container">
                     <a id="upload">발행하기</a>
@@ -44,15 +43,15 @@
                     <span>일정 가져오기</span>
                 </label>
             </div>
+            
+        <div class="fix-container">
             <div class="sub-input-container">
                 <div class="text-container">
-                    <label class='size-group' onclick="textOnchange('sub-title')">
-                        <input type="radio" name="sub-input-text" value="sub-title">
-                        <button class="image-btn">부제목</button>
+                    <label class='size-group'>
+                        <button class="image-btn" onclick="textOnchange(event, 'sub-title')">부제목</button>
                     </label>
-                    <label class='size-group' onclick="textOnchange('content')">
-                        <input type="radio" name="sub-input-text" value="content">
-                        <button class="image-btn">본문</button>
+                    <label class='size-group'>
+                        <button class="image-btn" onclick="textOnchange(event, 'content')">본문</button>
                     </label>
                 </div>
                 <div class="image-container hidden">
