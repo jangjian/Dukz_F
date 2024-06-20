@@ -1,10 +1,11 @@
-.fix-container {
-    position: fixed;
-    background-color: var(--bs-white);
-}
 .container {
     text-align: center;
     padding-bottom: 40px;
+}
+.fix-container {
+    position: fixed;
+    width: 100%;
+    background-color: var(--bs-white);
 }
 .title {
     margin: 20px 20px 0px 20px;
@@ -156,7 +157,7 @@
     border-radius: 10px;
 }
 #card-news-modal {
-    padding-top: 100px; 
+    /* padding-top: 100px;  */
     display: none;
 }
 .card-image-container {
