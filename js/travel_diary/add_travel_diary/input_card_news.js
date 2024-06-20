@@ -132,6 +132,8 @@ cardSaveBtn.onclick = () => {
     }
 
     CardNewsmodal.style.display = 'none';
+
+    saveCardNews()
 }
 
 const addCardNews = (cardNewsId) => {
@@ -224,9 +226,6 @@ function saveCardNews() {
         alert("카드 뉴스 저장 중 에러가 발생했습니다.");
     });
 }
-
-
-document.getElementById('cardSaveBtn').addEventListener('click', saveCardNews);
 
 function resetModalContent() {
     placeInput.value = '';
