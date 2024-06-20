@@ -39,4 +39,20 @@ function fetchAndLogUserInfo() {
         });
 }
 
+function getBookmark() {
+    const userid = localStorage.getItem('userid');
+
+    axios.post('http://54.180.238.52:3000/user/getUserBookmarks', {
+        userid: userid
+    })
+        .then(response => {
+            bookmarks = response.data.bookmarks;
+            console.log(bookmarks);
+        })
+        .catch(error => {
+            console.error('사용자 정보 불러오기 실패:', error);
+        });
+}
+
+getBookmark();
 fetchAndLogUserInfo();
