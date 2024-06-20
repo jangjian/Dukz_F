@@ -3,9 +3,11 @@
     padding-bottom: 40px;
 }
 .fix-container {
-    position: fixed;
-    width: 100%;
-    background-color: var(--bs-white);
+    position: -webkit-sticky; 
+    position: sticky;
+    top: 0; 
+    z-index: 2;
+    background-color: white; 
 }
 .title {
     margin: 10px 20px 0px 20px;
@@ -87,7 +89,7 @@
 
 /* content-container */
 .content-container {
-    padding: 180px 20px 0px 20px;
+    padding: 0px 20px;
 }
 
 /* 글자 */
@@ -116,7 +118,7 @@
 .modal {
     display: none; 
     position: fixed; 
-    z-index: 1; 
+    z-index: 1000; 
     padding-top: 200px; 
     left: 0;
     top: 0;
@@ -187,7 +189,7 @@
     font-weight: var(--bs-font-medium);
     right: 10px;
     position: absolute;
-    z-index: 3;
+    z-index: 1001;
 }
 #image-input {
     background-size: cover;
