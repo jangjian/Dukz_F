@@ -7,7 +7,8 @@ const formData = new FormData();
 
 let diaryFormData = [];
 
-const textOnchange = (str) => {
+const textOnchange = (event, str) => {
+    event.stopPropagation();
     let txtDiv = document.createElement('textarea');
 
     console.log('dd')
@@ -33,13 +34,12 @@ const textOnchange = (str) => {
 
     alignOnChange();
 };
-
-document.querySelectorAll('.text-container > .size-group input').forEach(input => {
-    input.addEventListener('click', function (event) {
-        event.stopPropagation();
-        textOnchange('content');
-    });
-});
+// document.querySelectorAll('.text-container > .size-group input').forEach(input => {
+//     input.addEventListener('click', function (event) {
+//         event.stopPropagation();
+//         textOnchange('content');
+//     });
+// });
 
 let nowAlign = 'left';
 
