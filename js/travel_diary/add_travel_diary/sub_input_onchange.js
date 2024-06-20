@@ -89,6 +89,15 @@ const alignOnChange = () => {
 const saveDiary = async () => {
     let imageFileArrCount = 0;
     const formData = new FormData();
+    const regionName = localStorage.getItem('regionName');
+    const userid = localStorage.getItem('userid');
+    const selectedGenres = JSON.parse(localStorage.getItem('selectedGenres')); // 문자열을 배열로 변환
+
+    formData.append('regionName', regionName);
+    formData.append('userid', userid);
+    formData.append('genres', JSON.stringify(selectedGenres)); // 다시 문자열로 변환할 필요 없음
+
+    console.log(selectedGenres);
 
     formData.append('diaryId', diaryId);
 
@@ -148,7 +157,7 @@ const saveDiary = async () => {
     formData.append('contents', JSON.stringify(diaryFormData));
 
     try {
-        const response = await axios.post('http://54.180.238.52:3000/user/saveDiary', formData, {
+        const response = await axios.post('http://54.180.238.52:3000/user/saveDiaryDetails ', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

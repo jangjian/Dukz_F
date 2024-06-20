@@ -55,20 +55,6 @@ Element.prototype.setStyle = function (styles) {
     return this;
 };
 
-let selectedGenres = [];
-
-function selectedCheck(selectedGenre) {
-    const selectedGenreId = selectedGenre.id;
-
-    const index = selectedGenres.indexOf(selectedGenreId);
-
-    if (index === -1) {
-        selectedGenres.push(selectedGenreId);
-    } else {
-        selectedGenres.splice(index, 1);
-    }
-}
-
 function submit() {
     const email = localStorage.getItem('email');
 
@@ -91,23 +77,28 @@ function submit() {
     console.log("Selected Genre IDs:", selectedGenres);
 }
 
-function diaryGenre() {
-    axios
-        .post("http://54.180.238.52:3000/user/saveGenre", {
-            genres: selectedGenres,
-            diaryId: localStorage.getItem('diaryId')
-        })
-        .then((response) => {
-            console.log("Genre registration response:", response.data);
-            if (response.data.message === "Genre information saved successfully") {
-            }
+let selectedGenres = []; // 전역 변수로 배열 초기화
 
-            location.href = 'step3_write.html'
-        })
-        .catch((e) => {
-            console.error("Error during genre registration:", e);
-            alert("에러가 발생했습니다.")
-        });
+function selectedCheck(selectedGenre) {
+    const selectedGenreId = selectedGenre.id;
 
-    console.log("Selected Genre IDs:", selectedGenres);
+    const index = selectedGenres.indexOf(selectedGenreId);
+
+    if (index === -1) {
+        selectedGenres.push(selectedGenreId);
+    } else {
+        selectedGenres.splice(index, 1);
+    }
 }
+
+function diaryGenre() {
+    const integerGenres = selectedGenres.map(id => parseInt(id)); // 각 요소를 정수로 변환
+    
+    console.log(integerGenres); // 정수 배열 확인
+
+    localStorage.setItem('selectedGenres', JSON.stringify(integerGenres)); // 정수 배열을 JSON 문자열로 변환하여 저장
+
+    window.location.href = 'step3_write.html'; // 필요시 페이지 이동 코드 추가
+}
+
+
