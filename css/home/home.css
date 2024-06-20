@@ -176,7 +176,7 @@
     font-weight: var(--bs-font-light);
     color: var(--bs-black-64);
     margin-top: 3px;
-    height: 42px;
+    height: 39px;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
