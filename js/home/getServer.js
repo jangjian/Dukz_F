@@ -172,12 +172,10 @@ function getDiary() {
                     
                     const placeContainerClass = `.place-container.place-${["first", "second", "third"][index]}`;
 
-                    //   console.log(diaryGroup)
-
                     const titleContent = diaryGroup.contents.find(diary => diary.contentType === 'title');
                     const firstContent = diaryGroup.contents.find(diary => diary.contentType === 'content');
                     const firstImage = diaryGroup.contents.find(diary => diary.contentType === 'image');
-                    const diaryId = diaryGroup.contents[0].diaryId; // Assuming diaryId is available in each group
+                    const diaryId = diaryGroup.diaryId; // Assuming diaryId is available in each group
 
                     if (titleContent) {
                         const titleElement = document.querySelector(`${placeContainerClass} .place-title`);
