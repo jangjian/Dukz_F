@@ -114,10 +114,13 @@ function getUserDiary() {
                         break;
                 }
             }
+
+            const diaryId = diaries[i].diaryId;
     
             const swiperSlide = document.createElement('div');
             swiperSlide.classList.add('swiper-slide');
             swiperSlide.classList.add('place-container');
+            swiperSlide.setAttribute('data-diary-id', diaryId);
             swiperSlide.innerHTML = 
                        `<img class="place-img" src="${resImage}">
                         <div class="place-txt-container">
@@ -143,6 +146,11 @@ function getUserDiary() {
             const regionHash = document.createElement('span');
             regionHash.innerHTML = `#${diaries[i].region}`;
             lastPlaceTag.appendChild(regionHash);
+
+            swiperSlide.addEventListener('click', () => {
+                localStorage.setItem('diaryId', diaryId);
+                location.href = '../travel_diary/travel_diary_content.html';
+            });
 
             new Swiper('.diary-swiper', {
                 slidesPerView: 1, // Number of slides visible at the same time
