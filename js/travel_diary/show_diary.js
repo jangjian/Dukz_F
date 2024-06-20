@@ -17,16 +17,15 @@ function getAllDiaries() {
             const diaryId = diaries[i].diaryId;
     
             for (let x of diaries[i].contents) {
-                console.log(x)
                 switch (x.contentType) {
                     case "title":
-                        if (resTitle == '제목이 없어요!') resTitle = x.content;
+                        resTitle = x.content;
                         break;
                     case "content":
-                        if (resContent == '본문이 없어요!') resContent = x.content;
+                        resContent = x.content;
                         break;
                     case "image":
-                        if (resImage == '../../Image/dukduk/nothing.svg') resImage = `http://54.180.238.52:3000${x.imageSrc}`;
+                        resImage = `http://54.180.238.52:3000${x.imageSrc}`;
                         break;
                 }
             }
@@ -105,13 +104,13 @@ function getUserDiary() {
             for (let x of diaries[i].contents) {
                 switch (x.contentType) {
                     case "title":
-                        if (resTitle == '제목이 없어요!') resTitle = x.content;
+                        resTitle = x.content;
                         break;
                     case "content":
-                        if (resContent == '본문이 없어요!') resContent = x.content;
+                        resContent = x.content;
                         break;
                     case "image":
-                        if (resImage == '../../Image/dukduk/nothing.svg') resImage = `http://54.180.238.52:3000${x.imageSrc}`;
+                        resImage = `http://54.180.238.52:3000${x.imageSrc}`;
                         break;
                 }
             }
