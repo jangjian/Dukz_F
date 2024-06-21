@@ -2,7 +2,6 @@ const gridDiaryContainer = document.getElementsByClassName('grid-diary-container
 const swiperWrapperDiv = document.getElementsByClassName('swiper-wrapper')[0];
 
 function getAllDiaries() {
-    showLoadingBar();
     
     axios.post("http://54.180.238.52:3000/user/getAllDiaries", {})
     .then((response) => {

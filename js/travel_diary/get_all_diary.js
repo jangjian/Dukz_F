@@ -12,7 +12,9 @@ function getAllDiaries() {
         })
         .catch((error) => {
             console.error('Error fetching diaries:', error);
-        });
+        }).finally(() => {
+            hideLoadingBar();
+        });;
 }
 
 function renderDiaries(diaries) {
