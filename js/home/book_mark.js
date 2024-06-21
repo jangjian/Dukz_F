@@ -8,40 +8,46 @@ function bookmarkChk(event, obj, cardNewsId) {
         // 카드뉴스를 북마크에서 해제
     }
 
-
-    // 모든 bookmark-img-tag 클래스를 가진 요소들을 가져옵니다.
-    // const elements = document.querySelectorAll('.bookmark-img-tag');
-
-    // // 요소들이 존재하는지 확인한 후 마지막 요소를 가져옵니다.
-    // if (elements.length > 0) {
-    //     const lastElement = elements[elements.length - 1];
-    //     console.log(lastElement); // 마지막 요소를 출력하거나 원하는 작업을 수행합니다.
-    // }
-
-
-    // console.log(obj)
-
     const userid = localStorage.getItem('userid');
-
-    console.log(userid, cardNewsId);
-
-    axios.post('http://54.180.238.52:3000/user/bookmarkCardNews', {
+    axios.post('http://54.180.238.52:3000/user/addBookmark', {
         userid : userid,
         cardNewsId: cardNewsId,
     })
     .then((response) => {
-        // if (response.data.success) {
-        //     if (isBookmarked) {
-        //         console.log('북마크 해제됨');
-        //     } else {
-        //         element.classList.add('bookmarked');
-        //         console.log('북마크 추가됨');
-        //     }
-        // } else {
-        //     console.error('북마크 업데이트에 실패했습니다.');
-        // }
+        console.log("북마크 저장 성공");
     })
     .catch((error) => {
-        console.error('북마크 업데이트 요청 중 오류 발생:', error);
+        if (error.response && error.response.status === 400) {
+            alert('이미 저장한 카드뉴스입니다.');
+        } else {
+            console.error('북마크 업데이트 요청 중 오류 발생:', error);
+        }
     });
 }
+
+function getBookmark() {
+    const userid = localStorage.getItem('userid');
+
+    axios.post('http://54.180.238.52:3000/user/getUserBookmarks', {
+        userid: userid
+    })
+    .then(response => {
+        const bookmarks = response.data.bookmarks;
+        console.log(bookmarks);
+
+        // cardNewsId 확인용 출력
+        bookmarks.forEach(bookmark => {
+            console.log('bookmark Card News ID:', bookmark.cardNewsId);
+        });
+    })
+    .catch(error => {
+        if (error.response && error.response.status === 400) {
+            console.error('이미 저장한 카드뉴스입니다.');
+        } else {
+            console.error('사용자 정보 불러오기 실패:', error);
+        }
+    });
+}
+
+getBookmark();
+
