@@ -15,6 +15,8 @@ function getName() {
         })
         .catch((e) => {
             console.log(e);
+        }).finally(() => {
+            hideLoadingBar();
         });
 }
 
@@ -134,6 +136,5 @@ function getDiary() {
         writeDiv.appendChild(cardDiv)
     }
 }
-
-
-getDiary();
+getName()
+getDiary()
