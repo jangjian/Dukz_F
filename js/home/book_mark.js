@@ -23,6 +23,16 @@ function bookmarkChk(event, obj, cardNewsId) {
     } else {
         obj.src = "../../Image/icon/bookmark/un_fill.svg";
         // 카드뉴스를 북마크에서 해제
+        axios.post('http://54.180.238.52:3000/user/deleteBookmark', {
+            userid: userid,
+            cardNewsId: cardNewsId,
+        })
+        .then((response) => {
+            console.log("북마크 삭제 성공");
+        })
+        .catch((error) => {
+            console.error('북마크 업데이트 요청 중 오류 발생:', error);
+        });
     }
 }
 
@@ -49,7 +59,6 @@ async function getBookmark() {
     })
     .then(response => {
         const bookmarks = response.data.bookmarks;
-        console.log(bookmarks);
 
         // cardNewsId 확인용 출력
         bookmarks.forEach(bookmark => {
